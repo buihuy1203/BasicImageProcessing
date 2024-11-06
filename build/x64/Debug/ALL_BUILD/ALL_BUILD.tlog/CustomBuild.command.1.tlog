@@ -1,0 +1,10 @@
+^E:\BAI TAP\LAP TRINH SONG SONG\IMAGEPROCESSING\CMAKELISTS.TXT
+setlocal
+C:\Strawberry\c\bin\cmake.exe "-SE:/Bai Tap/Lap trinh song song/ImageProcessing" "-BE:/Bai Tap/Lap trinh song song/ImageProcessing/build" --check-stamp-file "E:/Bai Tap/Lap trinh song song/ImageProcessing/build/CMakeFiles/generate.stamp"
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal & call :cmErrorLevel %errorlevel% & goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd

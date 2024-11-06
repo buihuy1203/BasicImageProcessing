@@ -1,0 +1,9 @@
+E:/Bai Tap/Lap trinh song song/ImageProcessing/build/CMakeFiles/Experimental.dir
+E:/Bai Tap/Lap trinh song song/ImageProcessing/build/CMakeFiles/Nightly.dir
+E:/Bai Tap/Lap trinh song song/ImageProcessing/build/CMakeFiles/Continuous.dir
+E:/Bai Tap/Lap trinh song song/ImageProcessing/build/CMakeFiles/NightlyMemoryCheck.dir
+E:/Bai Tap/Lap trinh song song/ImageProcessing/build/CMakeFiles/ImageProcessing.dir
+E:/Bai Tap/Lap trinh song song/ImageProcessing/build/CMakeFiles/PACKAGE.dir
+E:/Bai Tap/Lap trinh song song/ImageProcessing/build/CMakeFiles/RUN_TESTS.dir
+E:/Bai Tap/Lap trinh song song/ImageProcessing/build/CMakeFiles/ALL_BUILD.dir
+E:/Bai Tap/Lap trinh song song/ImageProcessing/build/CMakeFiles/ZERO_CHECK.dir

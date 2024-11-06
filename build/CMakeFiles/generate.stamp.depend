@@ -1,0 +1,38 @@
+# CMake generation dependency list for this directory.
+C:/Strawberry/c/share/cmake-3.26/Modules/CMakeCInformation.cmake
+C:/Strawberry/c/share/cmake-3.26/Modules/CMakeCXXInformation.cmake
+C:/Strawberry/c/share/cmake-3.26/Modules/CMakeCommonLanguageInclude.cmake
+C:/Strawberry/c/share/cmake-3.26/Modules/CMakeGenericSystem.cmake
+C:/Strawberry/c/share/cmake-3.26/Modules/CMakeInitializeConfigs.cmake
+C:/Strawberry/c/share/cmake-3.26/Modules/CMakeLanguageInformation.cmake
+C:/Strawberry/c/share/cmake-3.26/Modules/CMakeRCInformation.cmake
+C:/Strawberry/c/share/cmake-3.26/Modules/CMakeSystemSpecificInformation.cmake
+C:/Strawberry/c/share/cmake-3.26/Modules/CMakeSystemSpecificInitialize.cmake
+C:/Strawberry/c/share/cmake-3.26/Modules/CPack.cmake
+C:/Strawberry/c/share/cmake-3.26/Modules/CPackComponent.cmake
+C:/Strawberry/c/share/cmake-3.26/Modules/CTest.cmake
+C:/Strawberry/c/share/cmake-3.26/Modules/CTestTargets.cmake
+C:/Strawberry/c/share/cmake-3.26/Modules/CTestUseLaunchers.cmake
+C:/Strawberry/c/share/cmake-3.26/Modules/Compiler/CMakeCommonCompilerMacros.cmake
+C:/Strawberry/c/share/cmake-3.26/Modules/Compiler/MSVC-C.cmake
+C:/Strawberry/c/share/cmake-3.26/Modules/Compiler/MSVC-CXX.cmake
+C:/Strawberry/c/share/cmake-3.26/Modules/Compiler/MSVC.cmake
+C:/Strawberry/c/share/cmake-3.26/Modules/DartConfiguration.tcl.in
+C:/Strawberry/c/share/cmake-3.26/Modules/FindPackageHandleStandardArgs.cmake
+C:/Strawberry/c/share/cmake-3.26/Modules/FindPackageMessage.cmake
+C:/Strawberry/c/share/cmake-3.26/Modules/Platform/Windows-MSVC-C.cmake
+C:/Strawberry/c/share/cmake-3.26/Modules/Platform/Windows-MSVC-CXX.cmake
+C:/Strawberry/c/share/cmake-3.26/Modules/Platform/Windows-MSVC.cmake
+C:/Strawberry/c/share/cmake-3.26/Modules/Platform/Windows.cmake
+C:/Strawberry/c/share/cmake-3.26/Modules/Platform/WindowsPaths.cmake
+C:/Strawberry/c/share/cmake-3.26/Templates/CPackConfig.cmake.in
+C:/opencv/build/x64/vc16/lib/OpenCVConfig-version.cmake
+C:/opencv/build/x64/vc16/lib/OpenCVConfig.cmake
+C:/opencv/build/x64/vc16/lib/OpenCVModules-debug.cmake
+C:/opencv/build/x64/vc16/lib/OpenCVModules-release.cmake
+C:/opencv/build/x64/vc16/lib/OpenCVModules.cmake
+E:/Bai Tap/Lap trinh song song/ImageProcessing/CMakeLists.txt
+E:/Bai Tap/Lap trinh song song/ImageProcessing/build/CMakeFiles/3.26.4/CMakeCCompiler.cmake
+E:/Bai Tap/Lap trinh song song/ImageProcessing/build/CMakeFiles/3.26.4/CMakeCXXCompiler.cmake
+E:/Bai Tap/Lap trinh song song/ImageProcessing/build/CMakeFiles/3.26.4/CMakeRCCompiler.cmake
+E:/Bai Tap/Lap trinh song song/ImageProcessing/build/CMakeFiles/3.26.4/CMakeSystem.cmake
