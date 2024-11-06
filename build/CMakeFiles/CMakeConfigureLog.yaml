@@ -223,3 +223,211 @@ events:
         
       exitCode: 0
 ...
+
+---
+events:
+  -
+    kind: "try_compile-v1"
+    backtrace:
+      - "C:/Strawberry/c/share/cmake-3.26/Modules/FindOpenMP.cmake:219 (try_compile)"
+      - "C:/Strawberry/c/share/cmake-3.26/Modules/FindOpenMP.cmake:483 (_OPENMP_GET_FLAGS)"
+      - "CMakeLists.txt:10 (find_package)"
+    description: "Detecting C OpenMP compiler info"
+    directories:
+      source: "E:/Bai Tap/Lap trinh song song/ImageProcessing/build/CMakeFiles/CMakeScratch/TryCompile-6v6io5"
+      binary: "E:/Bai Tap/Lap trinh song song/ImageProcessing/build/CMakeFiles/CMakeScratch/TryCompile-6v6io5"
+    cmakeVariables:
+      CMAKE_C_FLAGS: "/DWIN32 /D_WINDOWS /W3"
+    buildResult:
+      variable: "OpenMP_COMPILE_RESULT_C_openmp"
+      cached: true
+      stdout: |
+        Change Dir: E:/Bai Tap/Lap trinh song song/ImageProcessing/build/CMakeFiles/CMakeScratch/TryCompile-6v6io5
+        
+        Run Build Command(s):C:/Program Files/Microsoft Visual Studio/2022/Community/MSBuild/Current/Bin/amd64/MSBuild.exe cmTC_f4775.vcxproj /p:Configuration=Debug /p:Platform=x64 /p:VisualStudioVersion=17.0 /v:n && MSBuild version 17.11.9+a69bbaaf5 for .NET Framework
+        Build started 06/11/2024 8:46:10 CH.
+        
+        Project "E:\\Bai Tap\\Lap trinh song song\\ImageProcessing\\build\\CMakeFiles\\CMakeScratch\\TryCompile-6v6io5\\cmTC_f4775.vcxproj" on node 1 (default targets).
+        PrepareForBuild:
+          Creating directory "cmTC_f4775.dir\\Debug\\".
+          Structured output is enabled. The formatting of compiler diagnostics will reflect the error hierarchy. See https://aka.ms/cpp/structured-output for more details.
+          Creating directory "E:\\Bai Tap\\Lap trinh song song\\ImageProcessing\\build\\CMakeFiles\\CMakeScratch\\TryCompile-6v6io5\\Debug\\".
+          Creating directory "cmTC_f4775.dir\\Debug\\cmTC_f4775.tlog\\".
+        InitializeBuildStatus:
+          Creating "cmTC_f4775.dir\\Debug\\cmTC_f4775.tlog\\unsuccessfulbuild" because "AlwaysCreate" was specified.
+          Touching "cmTC_f4775.dir\\Debug\\cmTC_f4775.tlog\\unsuccessfulbuild".
+        ClCompile:
+          C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\VC\\Tools\\MSVC\\14.41.34120\\bin\\HostX64\\x64\\CL.exe /c /Zi /W3 /WX- /diagnostics:column /Od /Ob0 /D _MBCS /D WIN32 /D _WINDOWS /D "CMAKE_INTDIR=\\"Debug\\"" /Gm- /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Zc:inline /openmp /Fo"cmTC_f4775.dir\\Debug\\\\" /Fd"cmTC_f4775.dir\\Debug\\vc143.pdb" /external:W3 /Gd /TC /errorReport:queue "E:\\Bai Tap\\Lap trinh song song\\ImageProcessing\\build\\CMakeFiles\\CMakeScratch\\TryCompile-6v6io5\\OpenMPTryFlag.c"
+          Microsoft (R) C/C++ Optimizing Compiler Version 19.41.34123 for x64
+          Copyright (C) Microsoft Corporation.  All rights reserved.
+          cl /c /Zi /W3 /WX- /diagnostics:column /Od /Ob0 /D _MBCS /D WIN32 /D _WINDOWS /D "CMAKE_INTDIR=\\"Debug\\"" /Gm- /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Zc:inline /openmp /Fo"cmTC_f4775.dir\\Debug\\\\" /Fd"cmTC_f4775.dir\\Debug\\vc143.pdb" /external:W3 /Gd /TC /errorReport:queue "E:\\Bai Tap\\Lap trinh song song\\ImageProcessing\\build\\CMakeFiles\\CMakeScratch\\TryCompile-6v6io5\\OpenMPTryFlag.c"
+          OpenMPTryFlag.c
+        Link:
+          C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\VC\\Tools\\MSVC\\14.41.34120\\bin\\HostX64\\x64\\link.exe /ERRORREPORT:QUEUE /OUT:"E:\\Bai Tap\\Lap trinh song song\\ImageProcessing\\build\\CMakeFiles\\CMakeScratch\\TryCompile-6v6io5\\Debug\\cmTC_f4775.exe" /INCREMENTAL /ILK:"cmTC_f4775.dir\\Debug\\cmTC_f4775.ilk" /NOLOGO kernel32.lib user32.lib gdi32.lib winspool.lib shell32.lib ole32.lib oleaut32.lib uuid.lib comdlg32.lib advapi32.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /DEBUG /PDB:"E:/Bai Tap/Lap trinh song song/ImageProcessing/build/CMakeFiles/CMakeScratch/TryCompile-6v6io5/Debug/cmTC_f4775.pdb" /SUBSYSTEM:CONSOLE /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"E:/Bai Tap/Lap trinh song song/ImageProcessing/build/CMakeFiles/CMakeScratch/TryCompile-6v6io5/Debug/cmTC_f4775.lib" /MACHINE:X64  /machine:x64 cmTC_f4775.dir\\Debug\\OpenMPTryFlag.obj
+          cmTC_f4775.vcxproj -> E:\\Bai Tap\\Lap trinh song song\\ImageProcessing\\build\\CMakeFiles\\CMakeScratch\\TryCompile-6v6io5\\Debug\\cmTC_f4775.exe
+        FinalizeBuildStatus:
+          Deleting file "cmTC_f4775.dir\\Debug\\cmTC_f4775.tlog\\unsuccessfulbuild".
+          Touching "cmTC_f4775.dir\\Debug\\cmTC_f4775.tlog\\cmTC_f4775.lastbuildstate".
+        Done Building Project "E:\\Bai Tap\\Lap trinh song song\\ImageProcessing\\build\\CMakeFiles\\CMakeScratch\\TryCompile-6v6io5\\cmTC_f4775.vcxproj" (default targets).
+        
+        Build succeeded.
+            0 Warning(s)
+            0 Error(s)
+        
+        Time Elapsed 00:00:00.90
+        
+      exitCode: 0
+  -
+    kind: "try_compile-v1"
+    backtrace:
+      - "C:/Strawberry/c/share/cmake-3.26/Modules/FindOpenMP.cmake:219 (try_compile)"
+      - "C:/Strawberry/c/share/cmake-3.26/Modules/FindOpenMP.cmake:483 (_OPENMP_GET_FLAGS)"
+      - "CMakeLists.txt:10 (find_package)"
+    description: "Detecting CXX OpenMP compiler info"
+    directories:
+      source: "E:/Bai Tap/Lap trinh song song/ImageProcessing/build/CMakeFiles/CMakeScratch/TryCompile-rzy3fg"
+      binary: "E:/Bai Tap/Lap trinh song song/ImageProcessing/build/CMakeFiles/CMakeScratch/TryCompile-rzy3fg"
+    cmakeVariables:
+      CMAKE_CXX_FLAGS: "/DWIN32 /D_WINDOWS /W3 /GR /EHsc"
+    buildResult:
+      variable: "OpenMP_COMPILE_RESULT_CXX_openmp"
+      cached: true
+      stdout: |
+        Change Dir: E:/Bai Tap/Lap trinh song song/ImageProcessing/build/CMakeFiles/CMakeScratch/TryCompile-rzy3fg
+        
+        Run Build Command(s):C:/Program Files/Microsoft Visual Studio/2022/Community/MSBuild/Current/Bin/amd64/MSBuild.exe cmTC_8cddc.vcxproj /p:Configuration=Debug /p:Platform=x64 /p:VisualStudioVersion=17.0 /v:n && MSBuild version 17.11.9+a69bbaaf5 for .NET Framework
+        Build started 06/11/2024 8:46:11 CH.
+        
+        Project "E:\\Bai Tap\\Lap trinh song song\\ImageProcessing\\build\\CMakeFiles\\CMakeScratch\\TryCompile-rzy3fg\\cmTC_8cddc.vcxproj" on node 1 (default targets).
+        PrepareForBuild:
+          Creating directory "cmTC_8cddc.dir\\Debug\\".
+          Structured output is enabled. The formatting of compiler diagnostics will reflect the error hierarchy. See https://aka.ms/cpp/structured-output for more details.
+          Creating directory "E:\\Bai Tap\\Lap trinh song song\\ImageProcessing\\build\\CMakeFiles\\CMakeScratch\\TryCompile-rzy3fg\\Debug\\".
+          Creating directory "cmTC_8cddc.dir\\Debug\\cmTC_8cddc.tlog\\".
+        InitializeBuildStatus:
+          Creating "cmTC_8cddc.dir\\Debug\\cmTC_8cddc.tlog\\unsuccessfulbuild" because "AlwaysCreate" was specified.
+          Touching "cmTC_8cddc.dir\\Debug\\cmTC_8cddc.tlog\\unsuccessfulbuild".
+        ClCompile:
+          C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\VC\\Tools\\MSVC\\14.41.34120\\bin\\HostX64\\x64\\CL.exe /c /Zi /W3 /WX- /diagnostics:column /Od /Ob0 /D _MBCS /D WIN32 /D _WINDOWS /D "CMAKE_INTDIR=\\"Debug\\"" /Gm- /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Zc:inline /GR /openmp /Fo"cmTC_8cddc.dir\\Debug\\\\" /Fd"cmTC_8cddc.dir\\Debug\\vc143.pdb" /external:W3 /Gd /TP /errorReport:queue "E:\\Bai Tap\\Lap trinh song song\\ImageProcessing\\build\\CMakeFiles\\CMakeScratch\\TryCompile-rzy3fg\\OpenMPTryFlag.cpp"
+          Microsoft (R) C/C++ Optimizing Compiler Version 19.41.34123 for x64
+          Copyright (C) Microsoft Corporation.  All rights reserved.
+          cl /c /Zi /W3 /WX- /diagnostics:column /Od /Ob0 /D _MBCS /D WIN32 /D _WINDOWS /D "CMAKE_INTDIR=\\"Debug\\"" /Gm- /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Zc:inline /GR /openmp /Fo"cmTC_8cddc.dir\\Debug\\\\" /Fd"cmTC_8cddc.dir\\Debug\\vc143.pdb" /external:W3 /Gd /TP /errorReport:queue "E:\\Bai Tap\\Lap trinh song song\\ImageProcessing\\build\\CMakeFiles\\CMakeScratch\\TryCompile-rzy3fg\\OpenMPTryFlag.cpp"
+          OpenMPTryFlag.cpp
+        Link:
+          C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\VC\\Tools\\MSVC\\14.41.34120\\bin\\HostX64\\x64\\link.exe /ERRORREPORT:QUEUE /OUT:"E:\\Bai Tap\\Lap trinh song song\\ImageProcessing\\build\\CMakeFiles\\CMakeScratch\\TryCompile-rzy3fg\\Debug\\cmTC_8cddc.exe" /INCREMENTAL /ILK:"cmTC_8cddc.dir\\Debug\\cmTC_8cddc.ilk" /NOLOGO kernel32.lib user32.lib gdi32.lib winspool.lib shell32.lib ole32.lib oleaut32.lib uuid.lib comdlg32.lib advapi32.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /DEBUG /PDB:"E:/Bai Tap/Lap trinh song song/ImageProcessing/build/CMakeFiles/CMakeScratch/TryCompile-rzy3fg/Debug/cmTC_8cddc.pdb" /SUBSYSTEM:CONSOLE /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"E:/Bai Tap/Lap trinh song song/ImageProcessing/build/CMakeFiles/CMakeScratch/TryCompile-rzy3fg/Debug/cmTC_8cddc.lib" /MACHINE:X64  /machine:x64 cmTC_8cddc.dir\\Debug\\OpenMPTryFlag.obj
+          cmTC_8cddc.vcxproj -> E:\\Bai Tap\\Lap trinh song song\\ImageProcessing\\build\\CMakeFiles\\CMakeScratch\\TryCompile-rzy3fg\\Debug\\cmTC_8cddc.exe
+        FinalizeBuildStatus:
+          Deleting file "cmTC_8cddc.dir\\Debug\\cmTC_8cddc.tlog\\unsuccessfulbuild".
+          Touching "cmTC_8cddc.dir\\Debug\\cmTC_8cddc.tlog\\cmTC_8cddc.lastbuildstate".
+        Done Building Project "E:\\Bai Tap\\Lap trinh song song\\ImageProcessing\\build\\CMakeFiles\\CMakeScratch\\TryCompile-rzy3fg\\cmTC_8cddc.vcxproj" (default targets).
+        
+        Build succeeded.
+            0 Warning(s)
+            0 Error(s)
+        
+        Time Elapsed 00:00:00.81
+        
+      exitCode: 0
+  -
+    kind: "try_compile-v1"
+    backtrace:
+      - "C:/Strawberry/c/share/cmake-3.26/Modules/FindOpenMP.cmake:419 (try_compile)"
+      - "C:/Strawberry/c/share/cmake-3.26/Modules/FindOpenMP.cmake:557 (_OPENMP_GET_SPEC_DATE)"
+      - "CMakeLists.txt:10 (find_package)"
+    description: "Detecting C OpenMP version"
+    directories:
+      source: "E:/Bai Tap/Lap trinh song song/ImageProcessing/build/CMakeFiles/CMakeScratch/TryCompile-srffor"
+      binary: "E:/Bai Tap/Lap trinh song song/ImageProcessing/build/CMakeFiles/CMakeScratch/TryCompile-srffor"
+    cmakeVariables:
+      CMAKE_C_FLAGS: "/DWIN32 /D_WINDOWS /W3"
+    buildResult:
+      variable: "OpenMP_SPECTEST_C_"
+      cached: true
+      stdout: |
+        Change Dir: E:/Bai Tap/Lap trinh song song/ImageProcessing/build/CMakeFiles/CMakeScratch/TryCompile-srffor
+        
+        Run Build Command(s):C:/Program Files/Microsoft Visual Studio/2022/Community/MSBuild/Current/Bin/amd64/MSBuild.exe cmTC_99e1b.vcxproj /p:Configuration=Debug /p:Platform=x64 /p:VisualStudioVersion=17.0 /v:n && MSBuild version 17.11.9+a69bbaaf5 for .NET Framework
+        Build started 06/11/2024 8:46:13 CH.
+        
+        Project "E:\\Bai Tap\\Lap trinh song song\\ImageProcessing\\build\\CMakeFiles\\CMakeScratch\\TryCompile-srffor\\cmTC_99e1b.vcxproj" on node 1 (default targets).
+        PrepareForBuild:
+          Creating directory "cmTC_99e1b.dir\\Debug\\".
+          Structured output is enabled. The formatting of compiler diagnostics will reflect the error hierarchy. See https://aka.ms/cpp/structured-output for more details.
+          Creating directory "E:\\Bai Tap\\Lap trinh song song\\ImageProcessing\\build\\CMakeFiles\\CMakeScratch\\TryCompile-srffor\\Debug\\".
+          Creating directory "cmTC_99e1b.dir\\Debug\\cmTC_99e1b.tlog\\".
+        InitializeBuildStatus:
+          Creating "cmTC_99e1b.dir\\Debug\\cmTC_99e1b.tlog\\unsuccessfulbuild" because "AlwaysCreate" was specified.
+          Touching "cmTC_99e1b.dir\\Debug\\cmTC_99e1b.tlog\\unsuccessfulbuild".
+        ClCompile:
+          C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\VC\\Tools\\MSVC\\14.41.34120\\bin\\HostX64\\x64\\CL.exe /c /Zi /W3 /WX- /diagnostics:column /Od /Ob0 /D _MBCS /D WIN32 /D _WINDOWS /D "CMAKE_INTDIR=\\"Debug\\"" /Gm- /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Zc:inline /openmp /Fo"cmTC_99e1b.dir\\Debug\\\\" /Fd"cmTC_99e1b.dir\\Debug\\vc143.pdb" /external:W3 /Gd /TC /errorReport:queue "E:\\Bai Tap\\Lap trinh song song\\ImageProcessing\\build\\CMakeFiles\\CMakeScratch\\TryCompile-srffor\\OpenMPCheckVersion.c"
+          Microsoft (R) C/C++ Optimizing Compiler Version 19.41.34123 for x64
+          Copyright (C) Microsoft Corporation.  All rights reserved.
+          cl /c /Zi /W3 /WX- /diagnostics:column /Od /Ob0 /D _MBCS /D WIN32 /D _WINDOWS /D "CMAKE_INTDIR=\\"Debug\\"" /Gm- /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Zc:inline /openmp /Fo"cmTC_99e1b.dir\\Debug\\\\" /Fd"cmTC_99e1b.dir\\Debug\\vc143.pdb" /external:W3 /Gd /TC /errorReport:queue "E:\\Bai Tap\\Lap trinh song song\\ImageProcessing\\build\\CMakeFiles\\CMakeScratch\\TryCompile-srffor\\OpenMPCheckVersion.c"
+          OpenMPCheckVersion.c
+        Link:
+          C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\VC\\Tools\\MSVC\\14.41.34120\\bin\\HostX64\\x64\\link.exe /ERRORREPORT:QUEUE /OUT:"E:\\Bai Tap\\Lap trinh song song\\ImageProcessing\\build\\CMakeFiles\\CMakeScratch\\TryCompile-srffor\\Debug\\cmTC_99e1b.exe" /INCREMENTAL /ILK:"cmTC_99e1b.dir\\Debug\\cmTC_99e1b.ilk" /NOLOGO kernel32.lib user32.lib gdi32.lib winspool.lib shell32.lib ole32.lib oleaut32.lib uuid.lib comdlg32.lib advapi32.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /DEBUG /PDB:"E:/Bai Tap/Lap trinh song song/ImageProcessing/build/CMakeFiles/CMakeScratch/TryCompile-srffor/Debug/cmTC_99e1b.pdb" /SUBSYSTEM:CONSOLE /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"E:/Bai Tap/Lap trinh song song/ImageProcessing/build/CMakeFiles/CMakeScratch/TryCompile-srffor/Debug/cmTC_99e1b.lib" /MACHINE:X64  /machine:x64 cmTC_99e1b.dir\\Debug\\OpenMPCheckVersion.obj
+          cmTC_99e1b.vcxproj -> E:\\Bai Tap\\Lap trinh song song\\ImageProcessing\\build\\CMakeFiles\\CMakeScratch\\TryCompile-srffor\\Debug\\cmTC_99e1b.exe
+        FinalizeBuildStatus:
+          Deleting file "cmTC_99e1b.dir\\Debug\\cmTC_99e1b.tlog\\unsuccessfulbuild".
+          Touching "cmTC_99e1b.dir\\Debug\\cmTC_99e1b.tlog\\cmTC_99e1b.lastbuildstate".
+        Done Building Project "E:\\Bai Tap\\Lap trinh song song\\ImageProcessing\\build\\CMakeFiles\\CMakeScratch\\TryCompile-srffor\\cmTC_99e1b.vcxproj" (default targets).
+        
+        Build succeeded.
+            0 Warning(s)
+            0 Error(s)
+        
+        Time Elapsed 00:00:00.96
+        
+      exitCode: 0
+  -
+    kind: "try_compile-v1"
+    backtrace:
+      - "C:/Strawberry/c/share/cmake-3.26/Modules/FindOpenMP.cmake:419 (try_compile)"
+      - "C:/Strawberry/c/share/cmake-3.26/Modules/FindOpenMP.cmake:557 (_OPENMP_GET_SPEC_DATE)"
+      - "CMakeLists.txt:10 (find_package)"
+    description: "Detecting CXX OpenMP version"
+    directories:
+      source: "E:/Bai Tap/Lap trinh song song/ImageProcessing/build/CMakeFiles/CMakeScratch/TryCompile-j4gvfc"
+      binary: "E:/Bai Tap/Lap trinh song song/ImageProcessing/build/CMakeFiles/CMakeScratch/TryCompile-j4gvfc"
+    cmakeVariables:
+      CMAKE_CXX_FLAGS: "/DWIN32 /D_WINDOWS /W3 /GR /EHsc"
+    buildResult:
+      variable: "OpenMP_SPECTEST_CXX_"
+      cached: true
+      stdout: |
+        Change Dir: E:/Bai Tap/Lap trinh song song/ImageProcessing/build/CMakeFiles/CMakeScratch/TryCompile-j4gvfc
+        
+        Run Build Command(s):C:/Program Files/Microsoft Visual Studio/2022/Community/MSBuild/Current/Bin/amd64/MSBuild.exe cmTC_7b767.vcxproj /p:Configuration=Debug /p:Platform=x64 /p:VisualStudioVersion=17.0 /v:n && MSBuild version 17.11.9+a69bbaaf5 for .NET Framework
+        Build started 06/11/2024 8:46:14 CH.
+        
+        Project "E:\\Bai Tap\\Lap trinh song song\\ImageProcessing\\build\\CMakeFiles\\CMakeScratch\\TryCompile-j4gvfc\\cmTC_7b767.vcxproj" on node 1 (default targets).
+        PrepareForBuild:
+          Creating directory "cmTC_7b767.dir\\Debug\\".
+          Structured output is enabled. The formatting of compiler diagnostics will reflect the error hierarchy. See https://aka.ms/cpp/structured-output for more details.
+          Creating directory "E:\\Bai Tap\\Lap trinh song song\\ImageProcessing\\build\\CMakeFiles\\CMakeScratch\\TryCompile-j4gvfc\\Debug\\".
+          Creating directory "cmTC_7b767.dir\\Debug\\cmTC_7b767.tlog\\".
+        InitializeBuildStatus:
+          Creating "cmTC_7b767.dir\\Debug\\cmTC_7b767.tlog\\unsuccessfulbuild" because "AlwaysCreate" was specified.
+          Touching "cmTC_7b767.dir\\Debug\\cmTC_7b767.tlog\\unsuccessfulbuild".
+        ClCompile:
+          C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\VC\\Tools\\MSVC\\14.41.34120\\bin\\HostX64\\x64\\CL.exe /c /Zi /W3 /WX- /diagnostics:column /Od /Ob0 /D _MBCS /D WIN32 /D _WINDOWS /D "CMAKE_INTDIR=\\"Debug\\"" /Gm- /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Zc:inline /GR /openmp /Fo"cmTC_7b767.dir\\Debug\\\\" /Fd"cmTC_7b767.dir\\Debug\\vc143.pdb" /external:W3 /Gd /TP /errorReport:queue "E:\\Bai Tap\\Lap trinh song song\\ImageProcessing\\build\\CMakeFiles\\CMakeScratch\\TryCompile-j4gvfc\\OpenMPCheckVersion.cpp"
+          Microsoft (R) C/C++ Optimizing Compiler Version 19.41.34123 for x64
+          Copyright (C) Microsoft Corporation.  All rights reserved.
+          cl /c /Zi /W3 /WX- /diagnostics:column /Od /Ob0 /D _MBCS /D WIN32 /D _WINDOWS /D "CMAKE_INTDIR=\\"Debug\\"" /Gm- /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Zc:inline /GR /openmp /Fo"cmTC_7b767.dir\\Debug\\\\" /Fd"cmTC_7b767.dir\\Debug\\vc143.pdb" /external:W3 /Gd /TP /errorReport:queue "E:\\Bai Tap\\Lap trinh song song\\ImageProcessing\\build\\CMakeFiles\\CMakeScratch\\TryCompile-j4gvfc\\OpenMPCheckVersion.cpp"
+          OpenMPCheckVersion.cpp
+        Link:
+          C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\VC\\Tools\\MSVC\\14.41.34120\\bin\\HostX64\\x64\\link.exe /ERRORREPORT:QUEUE /OUT:"E:\\Bai Tap\\Lap trinh song song\\ImageProcessing\\build\\CMakeFiles\\CMakeScratch\\TryCompile-j4gvfc\\Debug\\cmTC_7b767.exe" /INCREMENTAL /ILK:"cmTC_7b767.dir\\Debug\\cmTC_7b767.ilk" /NOLOGO kernel32.lib user32.lib gdi32.lib winspool.lib shell32.lib ole32.lib oleaut32.lib uuid.lib comdlg32.lib advapi32.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /DEBUG /PDB:"E:/Bai Tap/Lap trinh song song/ImageProcessing/build/CMakeFiles/CMakeScratch/TryCompile-j4gvfc/Debug/cmTC_7b767.pdb" /SUBSYSTEM:CONSOLE /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"E:/Bai Tap/Lap trinh song song/ImageProcessing/build/CMakeFiles/CMakeScratch/TryCompile-j4gvfc/Debug/cmTC_7b767.lib" /MACHINE:X64  /machine:x64 cmTC_7b767.dir\\Debug\\OpenMPCheckVersion.obj
+          cmTC_7b767.vcxproj -> E:\\Bai Tap\\Lap trinh song song\\ImageProcessing\\build\\CMakeFiles\\CMakeScratch\\TryCompile-j4gvfc\\Debug\\cmTC_7b767.exe
+        FinalizeBuildStatus:
+          Deleting file "cmTC_7b767.dir\\Debug\\cmTC_7b767.tlog\\unsuccessfulbuild".
+          Touching "cmTC_7b767.dir\\Debug\\cmTC_7b767.tlog\\cmTC_7b767.lastbuildstate".
+        Done Building Project "E:\\Bai Tap\\Lap trinh song song\\ImageProcessing\\build\\CMakeFiles\\CMakeScratch\\TryCompile-j4gvfc\\cmTC_7b767.vcxproj" (default targets).
+        
+        Build succeeded.
+            0 Warning(s)
+            0 Error(s)
+        
+        Time Elapsed 00:00:01.15
+        
+      exitCode: 0
+...
