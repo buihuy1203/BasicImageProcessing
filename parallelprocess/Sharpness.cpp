@@ -7,6 +7,9 @@ using namespace std;
 using namespace cv;
 
 Mat ParallelSharpness(const Mat &input, double sharp){
+    int procs_num;
+    procs_num = omp_get_num_procs();
+    omp_set_num_threads(procs_num);
     Mat result = Mat::zeros(input.size(), input.type());
     Mat grayImage;
     cvtColor(input, grayImage, COLOR_BGR2GRAY);
@@ -15,10 +18,12 @@ Mat ParallelSharpness(const Mat &input, double sharp){
         {1, -4, 1},
         {0, 1, 0}
     };
+    int sum = 0;
+    #pragma omp parallel for collapse(2) reduction(+ : sum)
     for (int i = 1; i < grayImage.rows - 1; ++i) {
         for (int j = 1; j < grayImage.cols - 1; ++j) {
             // Tính giá trị mới cho pixel (i, j)
-            int sum = 0;
+            //int sum = 0;
             for (int k = -1; k <= 1; ++k) {
                 for (int l = -1; l <= 1; ++l) {
                     sum += kernel[k + 1][l + 1] * grayImage.at<uchar>(i + k, j + l);
@@ -29,7 +34,7 @@ Mat ParallelSharpness(const Mat &input, double sharp){
         }
     }
     Mat sharpenedImage = Mat::zeros(input.size(), input.type());
-    
+    #pragma omp parallel for collapse(2)
     for (int i = 0; i < input.rows; ++i) {
         for (int j = 0; j < input.cols; ++j) {
             for (int c = 0; c < 3; ++c) { 
