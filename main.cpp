@@ -16,7 +16,7 @@ using namespace std;
 using namespace cv;
 int main() {
     // Đường dẫn đến ảnh
-    string path = "E:/Bai Tap/Lap trinh song song/ImageProcessing/meo_xe_tang.jpg";
+    string path = "E:/Bai Tap/Lap trinh song song/ImageProcessing/meo_xe_tang.png";
 
     // Đọc ảnh
     Mat image1 = imread(path, IMREAD_COLOR);
@@ -30,7 +30,7 @@ int main() {
     imshow("Original", image1);
     imshow("RGBtoYCrCb image", YCrCBImage(image1));
     imshow("Saturation image", Saturation(image1, 1));
-    imshow("Sharpness image", Sharpness(image1, 10));
+    imshow("Sharpness image", Sharpness(image1, 1));
     imshow("Blur image", BlurImage(image1, 1));
     imshow("Brightness image", BrightNess(image1, -100));
     auto end1 = chrono::high_resolution_clock::now(); 
@@ -40,7 +40,7 @@ int main() {
     // Hiển thị ảnh
     imshow("Original", image1);
     imshow("Saturation image parallel", ParallelSaturation(image1, 1));
-    imshow("Sharpness image parallel", ParallelSharpness(image1, 10));
+    imshow("Sharpness image parallel", ParallelSharpness(image1, -1));
     imshow("Blur image parallel", ParallelBlurImage(image1, 1));
     imshow("Brightness image parallel", ParallelBrightNess(image1, -100));
     auto end2 = chrono::high_resolution_clock::now(); 
