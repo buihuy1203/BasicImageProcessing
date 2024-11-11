@@ -5,7 +5,7 @@
 #include <omp.h>
 using namespace std;
 using namespace cv;
-
+//fasdasdga
 template<typename T>
 T newclamp(const T& value, const T& low, const T& high) {
     return (value < low) ? low : (value > high) ? high : value;
