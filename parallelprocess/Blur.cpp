@@ -7,28 +7,38 @@
 #define M_PI  3.14159
 using namespace std;
 using namespace cv;
+
+chrono::duration<double> duration1;
+
 vector<vector<float>> ParallelcreateGaussianKernel(int size, float sigma) {
     vector<vector<float>> kernel(size, vector<float>(size));
     float sum = 0.0f;
-
     int halfSize = size / 2;
-    for (int x = -halfSize; x <= halfSize; ++x) {
-        for (int y = -halfSize; y <= halfSize; ++y) {
-            kernel[x + halfSize][y + halfSize] = (1/(2*M_PI*sigma*sigma))*exp(-(x * x + y * y) / (2 * sigma * sigma));
-            sum += kernel[x + halfSize][y + halfSize];
+    auto start1 = chrono::high_resolution_clock::now();
+    omp_set_num_threads(4);
+     #pragma omp parallel shared(sum)
+    {
+        #pragma omp for collapse(2) reduction(+ : sum)
+        for (int x = -halfSize; x <= halfSize; ++x) {
+            for (int y = -halfSize; y <= halfSize; ++y) {
+                kernel[x + halfSize][y + halfSize] = (1/(2*M_PI*sigma*sigma))*exp(-(x * x + y * y) / (2 * sigma * sigma));
+                sum += kernel[x + halfSize][y + halfSize];
+            }
         }
     }
-
     // Chuẩn hóa kernel
+    #pragma omp for collapse(2)
     for (int i = 0; i < size; ++i) {
         for (int j = 0; j < size; ++j) {
             kernel[i][j] /= sum;
         }
     }
-    
+    auto end1 = chrono::high_resolution_clock::now();
+    duration1 = end1-start1;
     return kernel;
 }
 Mat ParallelBlurImage(Mat &input, float blur){
+    auto startSequence = chrono::high_resolution_clock::now(); 
     vector<vector<float>> kernel = ParallelcreateGaussianKernel(5, blur);
     int halfSize = 5 / 2;
     Mat result = Mat::zeros(input.rows,input.cols,CV_8UC3);
@@ -40,8 +50,6 @@ Mat ParallelBlurImage(Mat &input, float blur){
     #pragma omp parallel
     {
     int id=omp_get_thread_num();
-    if(id==0)
-    std::cout<<"Number of thread is "<<omp_get_num_threads();
     #pragma omp for collapse(2)
     for ( int i = 0; i < rows; ++i) 
     {
@@ -69,7 +77,10 @@ Mat ParallelBlurImage(Mat &input, float blur){
     }
     }
     auto end2 = chrono::high_resolution_clock::now(); 
+    auto endSequence = chrono::high_resolution_clock::now(); 
     chrono::duration<double> duration2 = end2 - start2;
-    cout <<"Thoi gian thuc thi blur song song: "<<duration2.count()<<"s"<<endl;
+    cout <<"Thoi gian thuc thi blur song song: "<<duration2.count()+duration1.count()<<"s"<<endl;
+    chrono::duration<double> durationSequence = endSequence - startSequence;
+    cout <<"Thoi gian thuc thi tuan tu Blur: "<<durationSequence.count()<<"s"<<endl;
     return result;
 }

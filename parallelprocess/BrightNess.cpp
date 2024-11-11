@@ -3,26 +3,28 @@
 #include <algorithm> 
 #include <cmath>
 #include <omp.h>
+#include <chrono>
 using namespace std;
 using namespace cv;
 
 Mat ParallelBrightNess(Mat &input, int bright){
+    auto startSequence = chrono::high_resolution_clock::now(); 
     Mat result =  Mat::zeros(input.rows, input.cols, CV_8UC3);
      int procs_num;
      procs_num = omp_get_num_procs();
     omp_set_num_threads(procs_num);
-
-    // #pragma omp parallel for collapse(2) 
-    // for(int y=0; y < input.rows; y++){
-    //     for(int x = 0; x < input.cols; x++){
-    //         Vec3b pixel = input.at<Vec3b>(y,x);
-    //         uchar blue = pixel[0];
-    //         uchar green = pixel[1];
-    //         uchar red = pixel[2]; 
-    //         result.at<Vec3b>(y, x) = Vec3b(saturate_cast<uchar>(blue+bright), saturate_cast<uchar>(green+bright), saturate_cast<uchar>(red+bright));
-    //     }
-    // }
-
+    auto startParrallel = chrono::high_resolution_clock::now(); 
+    #pragma omp parallel for collapse(2) shared(input, result)
+    for(int y=0; y < input.rows; y++){
+         for(int x = 0; x < input.cols; x++){
+             Vec3b pixel = input.at<Vec3b>(y,x);
+             uchar blue = pixel[0];
+             uchar green = pixel[1];
+             uchar red = pixel[2]; 
+             result.at<Vec3b>(y, x) = Vec3b(saturate_cast<uchar>(blue+bright), saturate_cast<uchar>(green+bright), saturate_cast<uchar>(red+bright));
+         }
+    }
+    /*
     #pragma omp parallel for collapse(2)   
     for (int y = 0; y < input.rows; y++) {
     // Truy cập trực tiếp vào bộ nhớ của input và result
@@ -44,7 +46,12 @@ Mat ParallelBrightNess(Mat &input, int bright){
         result_pixel[1] = saturate_cast<uchar>(green + bright);
         result_pixel[2] = saturate_cast<uchar>(red + bright);   
     }
-    }
-
+    }*/
+    auto endParralel = chrono::high_resolution_clock::now(); 
+    auto endSequence = chrono::high_resolution_clock::now(); 
+    chrono::duration<double> durationSequence = endSequence - startSequence;
+    chrono::duration<double> durationParallel = endParralel - startParrallel;
+    cout <<"Thoi gian thuc thi tuan tu Brightness: "<<durationSequence.count()<<"s"<<endl;
+    cout <<"Thoi gian thuc thi song song Brightness: "<<durationParallel.count()<<"s"<<endl;
     return result;
 }

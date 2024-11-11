@@ -12,12 +12,13 @@ T newclamp(const T& value, const T& low, const T& high) {
 }
 
 Mat ParallelSaturation(const Mat &input, float set_sar) {
+    auto startSequence = chrono::high_resolution_clock::now(); 
     int height = input.rows;
     int width = input.cols;
     Mat result = Mat::zeros(height, width, CV_8UC3);
     int procs_num = omp_get_num_procs();
     omp_set_num_threads(procs_num);
-
+    auto startParallel = chrono::high_resolution_clock::now(); 
     #pragma omp parallel for collapse(2) shared(input, result, set_sar)
     for (int y = 0; y < height; y++) {
         for (int x = 0; x < width; x++) {
@@ -59,5 +60,11 @@ Mat ParallelSaturation(const Mat &input, float set_sar) {
             );
         }
     }
+    auto endParralel = chrono::high_resolution_clock::now(); 
+    auto endSequence = chrono::high_resolution_clock::now(); 
+    chrono::duration<double> durationSequence = endSequence - startSequence;
+    chrono::duration<double> durationParallel = endParralel - startParallel;
+    cout <<"Thoi gian thuc thi tuan tu Saturation: "<<durationSequence.count()<<"s"<<endl;
+    cout <<"Thoi gian thuc thi song song Saturation: "<<durationParallel.count()<<"s"<<endl;
     return result;
 }

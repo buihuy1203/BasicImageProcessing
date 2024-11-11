@@ -7,32 +7,33 @@ using namespace std;
 using namespace cv;
 
 Mat ParallelYCrCBImage(const Mat &input) {
+    auto startSequence = chrono::high_resolution_clock::now(); 
     int height = input.rows;
     int width = input.cols;
     Mat result = Mat::zeros(height, width, CV_8UC3);
-
     int procs_num;
     procs_num = omp_get_num_procs();
     omp_set_num_threads(procs_num);
+    auto startParrallel = chrono::high_resolution_clock::now(); 
+    #pragma omp parallel for collapse(2) shared(input, result)
+     for (int y = 0; y < height; y++) {
+         for (int x = 0; x < width; x++) {
+             Vec3b pixel = input.at<Vec3b>(y, x);
+             uchar blue = pixel[0];
+             uchar green = pixel[1];
+             uchar red = pixel[2];
 
-    // #pragma omp parallel for collapse(2)
-    // for (int y = 0; y < height; y++) {
-    //     for (int x = 0; x < width; x++) {
-    //         Vec3b pixel = input.at<Vec3b>(y, x);
-    //         uchar blue = pixel[0];
-    //         uchar green = pixel[1];
-    //         uchar red = pixel[2];
+            uchar Y = static_cast<uchar>(0.299 * red + 0.587 * green + 0.114 * blue);
+            uchar Cb = static_cast<uchar>(128 + (blue - Y) * 0.564);
+            uchar Cr = static_cast<uchar>(128 + (red - Y) * 0.713);
 
-    //         uchar Y = static_cast<uchar>(0.299 * red + 0.587 * green + 0.114 * blue);
-    //         uchar Cb = static_cast<uchar>(128 + (blue - Y) * 0.564);
-    //         uchar Cr = static_cast<uchar>(128 + (red - Y) * 0.713);
-
-    //         result.at<Vec3b>(y, x) = Vec3b(Y, Cb, Cr);
-    //     }
-    // }
+            result.at<Vec3b>(y, x) = Vec3b(Y, Cb, Cr);
+         }
+     }
 
 
     // Parallelize the outer loop and inner loop with SIMD and collapse
+    /*auto startParrallel = chrono::high_resolution_clock::now(); 
     #pragma omp parallel for collapse(2) shared(input, result)
     for (int y = 0; y < height; y++) {
         // Truy cập trực tiếp vào bộ nhớ của input và result
@@ -59,7 +60,12 @@ Mat ParallelYCrCBImage(const Mat &input) {
             result_pixel[1] = Cb;
             result_pixel[2] = Cr;
         }
-    }
-
+    }*/
+    auto endParralel = chrono::high_resolution_clock::now(); 
+    auto endSequence = chrono::high_resolution_clock::now(); 
+    chrono::duration<double> durationSequence = endSequence - startSequence;
+    chrono::duration<double> durationParallel = endParralel - startParrallel;
+    cout <<"Thoi gian thuc thi tuan tu YCrCb: "<<durationSequence.count()<<"s"<<endl;
+    cout <<"Thoi gian thuc thi song song YCrCb: "<<durationParallel.count()<<"s"<<endl;
     return result;  
 }
