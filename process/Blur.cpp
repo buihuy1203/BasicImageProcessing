@@ -28,8 +28,8 @@ vector<vector<float>> createGaussianKernel(int size, float sigma) {
     return kernel;
 }
 Mat BlurImage(Mat &input, float blur){
-    vector<vector<float>> kernel = createGaussianKernel(5, blur);
-    int halfSize = 5 / 2;
+    vector<vector<float>> kernel = createGaussianKernel(7, blur);
+    int halfSize = 7 / 2;
     Mat result = Mat::zeros(input.rows,input.cols,CV_8UC3);
     // Duyệt qua từng pixel trong hình ảnh
     for (int i = 0; i < input.rows; ++i) {

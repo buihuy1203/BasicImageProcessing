@@ -6,13 +6,12 @@
 using namespace std;
 using namespace cv;
 
-Mat ParallelYCrCBImage(const Mat &input) {
+Mat ParallelYCrCBImage(const Mat &input, int process) {
     auto startSequence = chrono::high_resolution_clock::now(); 
     int height = input.rows;
     int width = input.cols;
     Mat result = Mat::zeros(height, width, CV_8UC3);
-    int procs_num;
-    procs_num = omp_get_num_procs();
+    int procs_num=process;
     omp_set_num_threads(procs_num);
     auto startParrallel = chrono::high_resolution_clock::now(); 
     #pragma omp parallel for collapse(2) shared(input, result)
@@ -65,7 +64,7 @@ Mat ParallelYCrCBImage(const Mat &input) {
     auto endSequence = chrono::high_resolution_clock::now(); 
     chrono::duration<double> durationSequence = endSequence - startSequence;
     chrono::duration<double> durationParallel = endParralel - startParrallel;
-    cout <<"Thoi gian thuc thi tuan tu YCrCb: "<<durationSequence.count()<<"s"<<endl;
+    cout <<"Thoi gian thuc thi tong chuong trinh YCrCb: "<<durationSequence.count()<<"s"<<endl;
     cout <<"Thoi gian thuc thi song song YCrCb: "<<durationParallel.count()<<"s"<<endl;
     return result;  
 }

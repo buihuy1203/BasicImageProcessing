@@ -7,11 +7,10 @@
 using namespace std;
 using namespace cv;
 
-Mat ParallelBrightNess(Mat &input, int bright){
+Mat ParallelBrightNess(Mat &input, int bright, int process){
     auto startSequence = chrono::high_resolution_clock::now(); 
     Mat result =  Mat::zeros(input.rows, input.cols, CV_8UC3);
-     int procs_num;
-     procs_num = omp_get_num_procs();
+    int procs_num=process;
     omp_set_num_threads(procs_num);
     auto startParrallel = chrono::high_resolution_clock::now(); 
     #pragma omp parallel for collapse(2) shared(input, result)
@@ -51,7 +50,7 @@ Mat ParallelBrightNess(Mat &input, int bright){
     auto endSequence = chrono::high_resolution_clock::now(); 
     chrono::duration<double> durationSequence = endSequence - startSequence;
     chrono::duration<double> durationParallel = endParralel - startParrallel;
-    cout <<"Thoi gian thuc thi tuan tu Brightness: "<<durationSequence.count()<<"s"<<endl;
+    cout <<"Thoi gian thuc thi tong chuong trinh Brightness: "<<durationSequence.count()<<"s"<<endl;
     cout <<"Thoi gian thuc thi song song Brightness: "<<durationParallel.count()<<"s"<<endl;
     return result;
 }
