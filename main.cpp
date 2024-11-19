@@ -2,6 +2,7 @@
 #include <opencv2/opencv.hpp>
 #include <omp.h>
 #include <chrono>
+#include <CL/cl.hpp>
 #include "process/RGBtoYCrCB.cpp"
 #include "process/Blur.cpp"
 #include "process/BrightNess.cpp"
@@ -14,9 +15,10 @@
 #include "parallelprocess/Sharpness.cpp"
 using namespace std;
 using namespace cv;
+
 int main() {
     // Đường dẫn đến ảnh
-    string path = "E:/Bai Tap/Lap trinh song song/ImageProcessing/meo_xe_tang.jpg";
+    string path = "E:/Bai Tap/Lap trinh song song/ImageProcessing/meo_xe_tang_co_lon.jpg";
 
     // Đọc ảnh
     Mat image1 = imread(path, IMREAD_COLOR);
@@ -49,6 +51,7 @@ int main() {
     chrono::duration<double> duration2 = end2 - start2;
     cout <<"Thoi gian thuc thi song song: "<<duration2.count()<<"s"<<endl;
     waitKey(0);
+    /*imshow("Brightness image parallel", ParallelBrightNessOpenCL(image1, -100));*/
 
     return 0;
 }

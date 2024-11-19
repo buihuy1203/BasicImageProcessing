@@ -6,6 +6,7 @@ C:/Strawberry/c/share/cmake-3.26/Modules/CMakeGenericSystem.cmake
 C:/Strawberry/c/share/cmake-3.26/Modules/CMakeInitializeConfigs.cmake
 C:/Strawberry/c/share/cmake-3.26/Modules/CMakeLanguageInformation.cmake
 C:/Strawberry/c/share/cmake-3.26/Modules/CMakeParseImplicitLinkInfo.cmake
+C:/Strawberry/c/share/cmake-3.26/Modules/CMakePushCheckState.cmake
 C:/Strawberry/c/share/cmake-3.26/Modules/CMakeRCInformation.cmake
 C:/Strawberry/c/share/cmake-3.26/Modules/CMakeSystemSpecificInformation.cmake
 C:/Strawberry/c/share/cmake-3.26/Modules/CMakeSystemSpecificInitialize.cmake
@@ -14,11 +15,13 @@ C:/Strawberry/c/share/cmake-3.26/Modules/CPackComponent.cmake
 C:/Strawberry/c/share/cmake-3.26/Modules/CTest.cmake
 C:/Strawberry/c/share/cmake-3.26/Modules/CTestTargets.cmake
 C:/Strawberry/c/share/cmake-3.26/Modules/CTestUseLaunchers.cmake
+C:/Strawberry/c/share/cmake-3.26/Modules/CheckSymbolExists.cmake
 C:/Strawberry/c/share/cmake-3.26/Modules/Compiler/CMakeCommonCompilerMacros.cmake
 C:/Strawberry/c/share/cmake-3.26/Modules/Compiler/MSVC-C.cmake
 C:/Strawberry/c/share/cmake-3.26/Modules/Compiler/MSVC-CXX.cmake
 C:/Strawberry/c/share/cmake-3.26/Modules/Compiler/MSVC.cmake
 C:/Strawberry/c/share/cmake-3.26/Modules/DartConfiguration.tcl.in
+C:/Strawberry/c/share/cmake-3.26/Modules/FindOpenCL.cmake
 C:/Strawberry/c/share/cmake-3.26/Modules/FindOpenMP.cmake
 C:/Strawberry/c/share/cmake-3.26/Modules/FindPackageHandleStandardArgs.cmake
 C:/Strawberry/c/share/cmake-3.26/Modules/FindPackageMessage.cmake

@@ -4,9 +4,11 @@
 #include <cmath>
 #include <omp.h>
 #include <chrono>
+#include <string>
+#include <CL/cl.hpp>
+#include "readfile.hpp"
 using namespace std;
 using namespace cv;
-
 Mat ParallelBrightNess(Mat &input, int bright, int process){
     auto startSequence = chrono::high_resolution_clock::now(); 
     Mat result =  Mat::zeros(input.rows, input.cols, CV_8UC3);
@@ -52,5 +54,56 @@ Mat ParallelBrightNess(Mat &input, int bright, int process){
     chrono::duration<double> durationParallel = endParralel - startParrallel;
     cout <<"Thoi gian thuc thi tong chuong trinh Brightness: "<<durationSequence.count()<<"s"<<endl;
     cout <<"Thoi gian thuc thi song song Brightness: "<<durationParallel.count()<<"s"<<endl;
+    return result;
+}
+
+Mat ParallelBrightnessOpenCL(Mat &input, int bright) {
+    // Kích thước ảnh
+    int rows = input.rows;
+    int cols = input.cols;
+
+    // Tạo mảng đầu vào và đầu ra
+    vector<uchar> inputData(input.rows * input.cols * 3);
+    vector<uchar> outputData(input.rows * input.cols * 3);
+    memcpy(inputData.data(), input.data, input.total() * input.elemSize());
+
+    // Khởi tạo OpenCL
+    cl::Platform platform = cl::Platform::getDefault();
+    cl::Device device = cl::Device::getDefault();
+    cl::Context context({device});
+    cl::Program::Sources sources;
+
+    // Đọc kernel từ file
+    string kernel_code = loadKernelSourceFile("brightness.cl");
+    sources.push_back({kernel_code.c_str(), kernel_code.length()});
+
+    cl::Program program(context, sources);
+    program.build({device});
+
+    // Tạo buffer
+    cl::Buffer bufferInput(context, CL_MEM_READ_ONLY, inputData.size());
+    cl::Buffer bufferOutput(context, CL_MEM_WRITE_ONLY, outputData.size());
+
+    // Gửi dữ liệu lên thiết bị
+    cl::CommandQueue queue(context, device);
+    queue.enqueueWriteBuffer(bufferInput, CL_TRUE, 0, inputData.size(), inputData.data());
+
+    // Tạo kernel
+    cl::Kernel kernel(program, "brightness");
+    kernel.setArg(0, bufferInput);
+    kernel.setArg(1, bufferOutput);
+    kernel.setArg(2, rows);
+    kernel.setArg(3, cols);
+    kernel.setArg(4, bright);
+
+    // Thiết lập kích thước công việc
+    cl::NDRange global(rows, cols);
+    queue.enqueueNDRangeKernel(kernel, cl::NullRange, global, cl::NullRange);
+
+    // Lấy kết quả từ thiết bị
+    queue.enqueueReadBuffer(bufferOutput, CL_TRUE, 0, outputData.size(), outputData.data());
+
+    // Chuyển đổi dữ liệu thành Mat
+    Mat result(input.size(), input.type(), outputData.data());
     return result;
 }

@@ -1,15 +1,19 @@
-cmake_minimum_required(VERSION 3.0.0)
+cmake_minimum_required(VERSION 3.25)
 project(ImageProcessing)
 
 include(CTest)
 enable_testing()
+
+add_executable(ImageProcessing main.cpp)
 
 find_package(OpenCV REQUIRED)
 include_directories( ${OpenCV_INCLUDE_DIRS} )
 
 find_package(OpenMP REQUIRED)
 
-add_executable(ImageProcessing main.cpp)
+find_package(OpenCL REQUIRED)
+include_directories(${OpenCL_INCLUDE_DIRS})
+target_link_libraries(${PROJECT_NAME} PUBLIC ${OpenCL_LIBRARIES})
 
 target_link_libraries(ImageProcessing PUBLIC ${OpenCV_LIBS})
 

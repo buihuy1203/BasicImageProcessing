@@ -4,6 +4,8 @@
 #include <cmath>
 #include <vector>
 #include <omp.h>
+#include "readfile.cpp"
+
 #define M_PI  3.14159
 using namespace std;
 using namespace cv;
