@@ -52,8 +52,8 @@ Mat ParallelBrightNess(Mat &input, int bright, int process){
     auto endSequence = chrono::high_resolution_clock::now(); 
     chrono::duration<double> durationSequence = endSequence - startSequence;
     chrono::duration<double> durationParallel = endParralel - startParrallel;
-    cout <<"Thoi gian thuc thi tong chuong trinh Brightness: "<<durationSequence.count()<<"s"<<endl;
-    cout <<"Thoi gian thuc thi song song Brightness: "<<durationParallel.count()<<"s"<<endl;
+    cout <<"Brightness Process Time: "<<durationSequence.count()<<"s"<<endl;
+    cout <<"Brightness Parallel Time: "<<durationParallel.count()<<"s"<<endl;
     return result;
 }
 
@@ -68,13 +68,25 @@ Mat ParallelBrightnessOpenCL(Mat &input, int bright) {
     memcpy(inputData.data(), input.data, input.total() * input.elemSize());
 
     // Khởi tạo OpenCL
-    cl::Platform platform = cl::Platform::getDefault();
-    cl::Device device = cl::Device::getDefault();
+    vector<cl::Platform> platforms;
+    cl::Platform::get(&platforms);
+    if (platforms.empty()) {
+        throw runtime_error("No OpenCL platforms found.");
+    }
+
+    cl::Platform platform = platforms[1]; // Chọn nền tảng đầu tiên
+    vector<cl::Device> devices;
+    platform.getDevices(CL_DEVICE_TYPE_GPU, &devices);
+    if (devices.empty()) {
+        throw std::runtime_error("No OpenCL devices found on platform.");
+    }
+
+    cl::Device device = devices[0]; // Chọn thiết bị đầu tiên
     cl::Context context({device});
     cl::Program::Sources sources;
 
     // Đọc kernel từ file
-    string kernel_code = loadKernelSourceFile("brightness.cl");
+    string kernel_code = loadKernelSourceFile("kernel/brightness.cl");
     sources.push_back({kernel_code.c_str(), kernel_code.length()});
 
     cl::Program program(context, sources);
@@ -104,6 +116,7 @@ Mat ParallelBrightnessOpenCL(Mat &input, int bright) {
     queue.enqueueReadBuffer(bufferOutput, CL_TRUE, 0, outputData.size(), outputData.data());
 
     // Chuyển đổi dữ liệu thành Mat
-    Mat result(input.size(), input.type(), outputData.data());
+    Mat result(input.size(), CV_8UC3); // Đảm bảo khớp định dạng
+    memcpy(result.data, outputData.data(), outputData.size()); 
     return result;
 }

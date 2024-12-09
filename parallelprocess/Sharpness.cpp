@@ -19,7 +19,7 @@ Mat ParallelSharpness(const Mat &input, double sharp, int process){
         {0, 1, 0}
     };
     auto startParrallel = chrono::high_resolution_clock::now(); 
-    #pragma omp parallel for collapse(2)
+    #pragma omp parallel for collapse(2) shared(grayImage, result)
         for (int i = 1; i < grayImage.rows - 1; ++i) {
             for (int j = 1; j < grayImage.cols - 1; ++j) {
             // Tính giá trị mới cho pixel (i, j)
@@ -34,12 +34,11 @@ Mat ParallelSharpness(const Mat &input, double sharp, int process){
         }
     }
     Mat sharpenedImage = Mat::zeros(input.size(), input.type());
-    int newValue;
-    #pragma omp parallel for collapse(2) shared(input, sharpenedImage, result, sharp)
+    #pragma omp parallel for collapse(2) shared(input, sharpenedImage)
     for (int i = 0; i < input.rows; ++i) {
         for (int j = 0; j < input.cols; ++j) {
             for (int c = 0; c < 3; ++c) { 
-                newValue = input.at<Vec3b>(i, j)[c] - sharp * result.at<uchar>(i, j);
+                int newValue = input.at<Vec3b>(i, j)[c] - sharp * result.at<uchar>(i, j);
                 sharpenedImage.at<Vec3b>(i, j)[c] = saturate_cast<uchar>(newValue);
             }
         }
@@ -48,7 +47,7 @@ Mat ParallelSharpness(const Mat &input, double sharp, int process){
     auto endSequence = chrono::high_resolution_clock::now(); 
     chrono::duration<double> durationSequence = endSequence - startSequence;
     chrono::duration<double> durationParallel = endParralel - startParrallel;
-    cout <<"Thoi gian thuc thi tong chuong trinh Sharpness: "<<durationSequence.count()<<"s"<<endl;
-    cout <<"Thoi gian thuc thi song song Sharpness: "<<durationParallel.count()<<"s"<<endl;
+    cout <<"Sharpness Process Time: "<<durationSequence.count()<<"s"<<endl;
+    cout <<"Sharness Parallel Time: "<<durationParallel.count()<<"s"<<endl;
     return sharpenedImage;
 }

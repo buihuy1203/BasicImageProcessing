@@ -64,7 +64,7 @@ Mat ParallelYCrCBImage(const Mat &input, int process) {
     auto endSequence = chrono::high_resolution_clock::now(); 
     chrono::duration<double> durationSequence = endSequence - startSequence;
     chrono::duration<double> durationParallel = endParralel - startParrallel;
-    cout <<"Thoi gian thuc thi tong chuong trinh YCrCb: "<<durationSequence.count()<<"s"<<endl;
-    cout <<"Thoi gian thuc thi song song YCrCb: "<<durationParallel.count()<<"s"<<endl;
+    cout <<"YCrCB Process Time: "<<durationSequence.count()<<"s"<<endl;
+    cout <<"YCrCB Parallel Time: "<<durationParallel.count()<<"s"<<endl;
     return result;  
 }

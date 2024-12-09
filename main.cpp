@@ -16,42 +16,131 @@
 using namespace std;
 using namespace cv;
 
-int main() {
-    // Đường dẫn đến ảnh
-    string path = "E:/Bai Tap/Lap trinh song song/ImageProcessing/meo_xe_tang_co_lon.jpg";
+bool compare(const Mat &input, const Mat &result){
+    for(int x = 0; x < input.rows; x++){
+        for(int y = 0; y < input.cols; y++){
+            Vec3b pixelin = input.at<Vec3b>(x, y);
+            Vec3b pixelres = result.at<Vec3b>(x, y); 
+            if (pixelin != pixelres) {
+                return false;
+            }
+        }
+    }
+    return true;
+}
 
-    // Đọc ảnh
+int main() {
+    // Image Path
+    string path = "E:/Bai Tap/Lap trinh song song/ImageProcessing/meo_xe_tang.png";
+
+    // Read Image
     Mat image1 = imread(path, IMREAD_COLOR);
-    // Kiểm tra nếu ảnh được đọc thành công
+    // Check if image is okay
     if (image1.empty()) {
-        cout << "Khong the doc anh." << endl;
+        cout << "Can't read image" << endl;
         return -1;
     }
-    imshow("Original", image1);
-    
-    auto start1 = chrono::high_resolution_clock::now(); 
-    // Hiển thị ảnh
-    imshow("RGBtoYCrCb image", YCrCBImage(image1));
-    imshow("Saturation image", Saturation(image1, 1));
-    imshow("Sharpness image", Sharpness(image1, 1));
-    imshow("Blur image", BlurImage(image1, 1));
-    imshow("Brightness image", BrightNess(image1, -100));
-    auto end1 = chrono::high_resolution_clock::now(); 
-    chrono::duration<double> duration1 = end1 - start1;
-    cout <<"Thoi gian thuc thi tuan tu: "<<duration1.count()<<"s"<<endl;
+    //Set Processor
     int processor = 4;
+    imshow("Original", image1);
+    //Start Clock On Sequence
+    auto start1 = chrono::high_resolution_clock::now(); 
+    // YCrCb
+    Mat YCrCBIm = YCrCBImage(image1);
+
+    // Saturation
+    Mat SatIm= Saturation(image1, 1);
+
+    // Sharpness
+    Mat SharpIm= Sharpness(image1, 1);
+
+    // Bluring
+    Mat BlurIm= BlurImage(image1, 1);
+
+    // Brightness
+    Mat BrightIm= BrightNess(image1, -100);
+
+    //End clock sequence
+    auto end1 = chrono::high_resolution_clock::now();
+
+    //Check time 
+    chrono::duration<double> duration1 = end1 - start1;
+    cout <<"Sequence time: "<<duration1.count()<<"s"<<endl;
+
+    //Start new clock
     auto start2 = chrono::high_resolution_clock::now(); 
-    // Hiển thị ảnh
-    imshow("RGBtoYCrCb image parallel", ParallelYCrCBImage(image1,processor));
-    imshow("Saturation image parallel", ParallelSaturation(image1, 1, processor));
-    imshow("Sharpness image parallel", ParallelSharpness(image1, 1,processor));
-    imshow("Blur image parallel", ParallelBlurImage(image1, 1,processor));
-    imshow("Brightness image parallel", ParallelBrightNess(image1, -100,processor));
+    //Parallel Processing
+
+    //YCrCB OpenMP
+    Mat YCrCBImP= ParallelYCrCBImage(image1,processor);
+    
+    //Saturation OpenMP
+    Mat SatImP= ParallelSaturation(image1, 1, processor);
+
+    //Sharpness OpenMP
+    Mat SharpImP= ParallelSharpness(image1, 1,processor);
+
+    //Bluring OpenMP
+    Mat BlurImP= ParallelBlurImage(image1, 1,processor);
+
+    //Brightness OpenMP
+    Mat BrightImP= ParallelBrightNess(image1, -100,processor);
+
+    //End clock
     auto end2 = chrono::high_resolution_clock::now(); 
+
+    //Get OpenMP Processing Time
     chrono::duration<double> duration2 = end2 - start2;
-    cout <<"Thoi gian thuc thi song song: "<<duration2.count()<<"s"<<endl;
-    waitKey(0);
-    /*imshow("Brightness image parallel", ParallelBrightNessOpenCL(image1, -100));*/
+    cout <<"Parallel OpenMP time: "<<duration2.count()<<"s"<<endl;
+    //Compare Result
+    if(compare(YCrCBIm,YCrCBImP)){
+        cout <<"YCrCB OpenMP true"<<endl;
+    }else
+    {
+        cout <<"YCrCB OpenMP false"<<endl;
+    }
+    if(compare(SatIm,SatImP)){
+        cout <<"Saturation OpenMP true"<<endl;
+    }else
+    {
+        cout <<"Saturation OpenMP false"<<endl;
+    }
+    if(compare(BlurIm,BlurImP)){
+        cout <<"Bluring OpenMP true"<<endl;
+    }else
+    {
+        cout <<"Bluring OpenMP false"<<endl;
+    }
+    if(compare(BrightIm,BrightImP)){
+        cout <<"Brightness OpenMP true"<<endl;
+    }else
+    {
+        cout <<"Brightness OpenMP false"<<endl;
+    }
+    if(compare(SharpIm,SharpImP)){
+        cout <<"Sharpness OpenMP true"<<endl;
+    }else
+    {
+        cout <<"Sharpness OpenMP false"<<endl;
+    }
+    //Start Platform OpenCL
+    //Check Device
+    /*
+    listPlatformsAndDevices();
+
+    //Start new clock
+    auto start3 = chrono::high_resolution_clock::now(); 
+
+    //Brightness OpenCL
+    Mat BrightImCL= ParallelBrightnessOpenCL(image1, -100);
+
+    //End Clock
+    auto end3 = chrono::high_resolution_clock::now(); 
+
+    //Get OpenCL Processing Time
+    chrono::duration<double> duration3 = end3 - start3;
+    cout <<"Thoi gian thuc thi song song openCL: "<<duration3.count()<<"s"<<endl;
+    */
 
     return 0;
 }
