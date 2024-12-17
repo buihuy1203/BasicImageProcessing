@@ -74,7 +74,7 @@ Mat ParallelBrightnessOpenCL(Mat &input, int bright) {
         throw runtime_error("No OpenCL platforms found.");
     }
 
-    cl::Platform platform = platforms[1]; // Chọn nền tảng đầu tiên
+    cl::Platform platform = platforms[0]; // Chọn nền tảng đầu tiên
     vector<cl::Device> devices;
     platform.getDevices(CL_DEVICE_TYPE_GPU, &devices);
     if (devices.empty()) {
@@ -114,9 +114,8 @@ Mat ParallelBrightnessOpenCL(Mat &input, int bright) {
 
     // Lấy kết quả từ thiết bị
     queue.enqueueReadBuffer(bufferOutput, CL_TRUE, 0, outputData.size(), outputData.data());
-
     // Chuyển đổi dữ liệu thành Mat
     Mat result(input.size(), CV_8UC3); // Đảm bảo khớp định dạng
-    memcpy(result.data, outputData.data(), outputData.size()); 
+    memcpy(result.data, outputData.data(), outputData.size());
     return result;
 }

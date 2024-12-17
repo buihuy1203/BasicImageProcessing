@@ -3,6 +3,9 @@
 #include <algorithm> 
 #include <cmath>
 #include <omp.h>
+#include <CL/cl.hpp>
+#include "readfile.hpp"
+#include <vector>
 using namespace std;
 using namespace cv;
 
@@ -50,4 +53,76 @@ Mat ParallelSharpness(const Mat &input, double sharp, int process){
     cout <<"Sharpness Process Time: "<<durationSequence.count()<<"s"<<endl;
     cout <<"Sharness Parallel Time: "<<durationParallel.count()<<"s"<<endl;
     return sharpenedImage;
+}
+
+Mat ParallelSharpnessOpenCL(const Mat& input, float sharp_var) {
+
+    // Convert input image to grayscale
+    int rows = input.rows;
+    int cols = input.cols;
+    Mat grayImage;
+    cvtColor(input, grayImage, COLOR_BGR2GRAY);
+
+    vector<uchar> inputData(rows * cols);
+    vector<uchar> inputColor(rows * cols * 3);
+    vector<uchar> outputData(rows * cols * 3);
+    memcpy(inputData.data(), grayImage.data, inputData.size());
+    memcpy(inputColor.data(), input.data, input.total() * input.elemSize());
+    // Initialize OpenCL
+    vector<cl::Platform> platforms;
+    cl::Platform::get(&platforms);
+    cl::Platform platform = platforms[0];
+
+    vector<cl::Device> devices;
+    platform.getDevices(CL_DEVICE_TYPE_GPU, &devices);
+    cl::Device device = devices[0];
+
+    cl::Context context(device);
+    cl::CommandQueue queue(context, device);
+
+    // Load kernel source
+    string kernelCode = loadKernelSourceFile("kernel/sharpness.cl");
+    cl::Program::Sources sources;
+    sources.push_back({kernelCode.c_str(), kernelCode.length()});
+
+    // Build program
+    cl::Program program(context, sources);
+    program.build({device});
+
+    // Create buffers
+    cl::Buffer bufferInput(context, CL_MEM_READ_ONLY, grayImage.total());
+    cl::Buffer resultBuffer(context, CL_MEM_READ_WRITE, grayImage.total());
+    cl::Buffer sharpResultBuffer(context, CL_MEM_WRITE_ONLY, input.total() * input.elemSize());
+    cl::Buffer bufferColor(context, CL_MEM_READ_ONLY, inputColor.size());
+
+    queue.enqueueWriteBuffer(bufferColor, CL_TRUE, 0, inputColor.size(), inputColor.data());
+    queue.enqueueWriteBuffer(bufferInput, CL_TRUE, 0, inputData.size(), inputData.data());
+    // Set kernel arguments
+    cl::Kernel sharpenKernel(program, "sharpen");
+    cl::Kernel applySharpnessKernel(program, "applySharpness");
+
+    sharpenKernel.setArg(0, bufferInput);
+    sharpenKernel.setArg(1, resultBuffer);
+    sharpenKernel.setArg(2, cols);
+    sharpenKernel.setArg(3, rows);
+
+    applySharpnessKernel.setArg(0, bufferColor);
+    applySharpnessKernel.setArg(1, resultBuffer);
+    applySharpnessKernel.setArg(2, sharpResultBuffer);
+    applySharpnessKernel.setArg(3, sharp_var);
+    applySharpnessKernel.setArg(4, cols);
+    applySharpnessKernel.setArg(5, rows);
+
+    // Run kernels
+    cl::NDRange global(cols, rows);
+    queue.enqueueNDRangeKernel(sharpenKernel, cl::NullRange, global, cl::NullRange);
+    queue.enqueueNDRangeKernel(applySharpnessKernel, cl::NullRange, global, cl::NullRange);
+
+    // Read back the result into outputData
+    queue.enqueueReadBuffer(sharpResultBuffer, CL_TRUE, 0, outputData.size(), outputData.data());
+    // Create the result Mat and copy data
+    Mat result(input.size(), CV_8UC3);
+    memcpy(result.data, outputData.data(), outputData.size());
+
+    return result;
 }

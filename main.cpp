@@ -22,6 +22,7 @@ bool compare(const Mat &input, const Mat &result){
             Vec3b pixelin = input.at<Vec3b>(x, y);
             Vec3b pixelres = result.at<Vec3b>(x, y); 
             if (pixelin != pixelres) {
+                cout << "Error at x: " << x << " y: " << y << endl;
                 return false;
             }
         }
@@ -31,7 +32,7 @@ bool compare(const Mat &input, const Mat &result){
 
 int main() {
     // Image Path
-    string path = "E:/Bai Tap/Lap trinh song song/ImageProcessing/meo_xe_tang.png";
+    string path = "E:/Bai Tap/Lap trinh song song/ImageProcessing/meo_xe_tang.jpg";
 
     // Read Image
     Mat image1 = imread(path, IMREAD_COLOR);
@@ -52,7 +53,7 @@ int main() {
     Mat SatIm= Saturation(image1, 1);
 
     // Sharpness
-    Mat SharpIm= Sharpness(image1, 1);
+    Mat SharpIm= Sharpness(image1, 5);
 
     // Bluring
     Mat BlurIm= BlurImage(image1, 1);
@@ -62,8 +63,8 @@ int main() {
 
     //End clock sequence
     auto end1 = chrono::high_resolution_clock::now();
-
     //Check time 
+    //imshow("SharpIm", SharpIm);
     chrono::duration<double> duration1 = end1 - start1;
     cout <<"Sequence time: "<<duration1.count()<<"s"<<endl;
 
@@ -78,7 +79,7 @@ int main() {
     Mat SatImP= ParallelSaturation(image1, 1, processor);
 
     //Sharpness OpenMP
-    Mat SharpImP= ParallelSharpness(image1, 1,processor);
+    Mat SharpImP= ParallelSharpness(image1, 5,processor);
 
     //Bluring OpenMP
     Mat BlurImP= ParallelBlurImage(image1, 1,processor);
@@ -125,8 +126,8 @@ int main() {
     }
     //Start Platform OpenCL
     //Check Device
-    /*
-    listPlatformsAndDevices();
+    
+    //listPlatformsAndDevices();
 
     //Start new clock
     auto start3 = chrono::high_resolution_clock::now(); 
@@ -134,13 +135,55 @@ int main() {
     //Brightness OpenCL
     Mat BrightImCL= ParallelBrightnessOpenCL(image1, -100);
 
+    Mat YCrCBImCL = ParallelYCrCBOpenCL(image1);
+
+    Mat SatImCL = ParallelSaturationOpenCL(image1,1);
+
+    Mat BlurImCL = ParallelBlurOpenCL(image1, 1);
+
+    Mat SharpImCL = ParallelSharpnessOpenCL(image1, 5);
     //End Clock
     auto end3 = chrono::high_resolution_clock::now(); 
+    //Check Image
+    imshow("YCrCBImCL", YCrCBImCL);
+    //imshow("BrightImCL", BrightImCL);
+    //imshow("SatImCL", SatImCL);
+    //imshow("BlurImCL", BlurImCL);
+    //imshow("SharpImCL", SharpImCL);
+    if(compare(YCrCBIm,YCrCBImCL)){
+        cout <<"YCrCB OpenCL true"<<endl;
+    }else
+    {
+        cout <<"YCrCB OpenCL false"<<endl;
+    }
+    if(compare(BrightIm,BrightImCL)){
+        cout <<"Brightness OpenCL true"<<endl;
+    }else
+    {
+        cout <<"Brightness OpenCL false"<<endl;
+    }
+    if(compare(SatIm,SatImCL)){
+        cout <<"Saturation OpenCL true"<<endl;
+    }else
+    {
+        cout <<"Saturation OpenCL false"<<endl;
+    }
+    if(compare(BlurIm,BlurImCL)){
+        cout <<"Blur OpenCL true"<<endl;
+    }else
+    {
+        cout <<"Blur OpenCL false"<<endl;
+    }
+    if(compare(SharpIm,SharpImCL)){
+        cout <<"Sharp OpenCL true"<<endl;
+    }else
+    {
+        cout <<"Sharp OpenCL false"<<endl;
+    }
 
     //Get OpenCL Processing Time
     chrono::duration<double> duration3 = end3 - start3;
     cout <<"Thoi gian thuc thi song song openCL: "<<duration3.count()<<"s"<<endl;
-    */
-
+    waitKey(0);
     return 0;
 }

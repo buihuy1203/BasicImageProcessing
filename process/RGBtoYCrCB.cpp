@@ -16,9 +16,9 @@ Mat YCrCBImage(const Mat &input) {
             uchar green = pixel[1];
             uchar red = pixel[2];
 
-            uchar Y = static_cast<uchar>(0.299 * red + 0.587 * green + 0.114 * blue);
-            uchar Cb = static_cast<uchar>(128 + (blue - Y) * 0.564);
-            uchar Cr = static_cast<uchar>(128 + (red - Y) * 0.713);
+            uchar Y = (uchar)(0.299f * red + 0.587f * green + 0.114f * blue);
+            uchar Cb = (uchar)(128.0f + (blue - Y) * 0.564f);
+            uchar Cr = (uchar)(128.0f + (red - Y) * 0.713f);
 
             result.at<Vec3b>(y, x) = Vec3b(Y, Cb, Cr);
         }
