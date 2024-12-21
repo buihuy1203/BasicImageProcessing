@@ -14,13 +14,13 @@ T newclamp(const T& value, const T& low, const T& high) {
 }
 
 Mat ParallelSaturation(const Mat &input, float set_sar, int process) {
-    auto startSequence = chrono::high_resolution_clock::now(); 
+    //auto startSequence = chrono::high_resolution_clock::now(); 
     int height = input.rows;
     int width = input.cols;
     Mat result = Mat::zeros(height, width, CV_8UC3);
     int procs_num = process;
     omp_set_num_threads(procs_num);
-    auto startParallel = chrono::high_resolution_clock::now(); 
+    //auto startParallel = chrono::high_resolution_clock::now(); 
     #pragma omp parallel for collapse(2) shared(input, result)
     for (int y = 0; y < height; y++) {
         for (int x = 0; x < width; x++) {
@@ -88,12 +88,13 @@ Mat ParallelSaturation(const Mat &input, float set_sar, int process) {
             );
         }
     }
+    /*
     auto endParralel = chrono::high_resolution_clock::now(); 
     auto endSequence = chrono::high_resolution_clock::now(); 
     chrono::duration<double> durationSequence = endSequence - startSequence;
     chrono::duration<double> durationParallel = endParralel - startParallel;
     cout <<"Saturation Process Time: "<<durationSequence.count()<<"s"<<endl;
-    cout <<"Saturation Parallel Time: "<<durationParallel.count()<<"s"<<endl;
+    cout <<"Saturation Parallel Time: "<<durationParallel.count()<<"s"<<endl;*/
     return result;
 }
 

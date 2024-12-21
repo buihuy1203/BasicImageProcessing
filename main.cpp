@@ -22,7 +22,6 @@ bool compare(const Mat &input, const Mat &result){
             Vec3b pixelin = input.at<Vec3b>(x, y);
             Vec3b pixelres = result.at<Vec3b>(x, y); 
             if (pixelin != pixelres) {
-                cout << "Error at x: " << x << " y: " << y << endl;
                 return false;
             }
         }
@@ -31,21 +30,22 @@ bool compare(const Mat &input, const Mat &result){
 }
 
 int main() {
-    // Image Path
-    string path = "E:/Bai Tap/Lap trinh song song/ImageProcessing/meo_xe_tang.jpg";
-
-    // Read Image
-    Mat image1 = imread(path, IMREAD_COLOR);
-    // Check if image is okay
-    if (image1.empty()) {
-        cout << "Can't read image" << endl;
-        return -1;
-    }
-    //Set Processor
-    int processor = 4;
-    imshow("Original", image1);
     //Start Clock On Sequence
-    auto start1 = chrono::high_resolution_clock::now(); 
+    /*auto start1 = chrono::high_resolution_clock::now(); 
+    for(int i = 1; i <= 200; i++){
+        // Image Path
+        string path = "E:/Bai Tap/Lap trinh song song/ImageProcessing/imagetest/meo_xe_tang ";
+        path += "(";
+        path += to_string(i);
+        path += ")";
+        path += ".jpg";
+        Mat image1 = imread(path, IMREAD_COLOR);
+        if (image1.empty()) {
+            cout << "Can't read image" << endl;
+            return -1;
+        }
+    //imshow("Original", image1);
+    
     // YCrCb
     Mat YCrCBIm = YCrCBImage(image1);
 
@@ -61,6 +61,8 @@ int main() {
     // Brightness
     Mat BrightIm= BrightNess(image1, -100);
 
+    cout << "Image: "<<i<<" finish"<<endl;
+    }
     //End clock sequence
     auto end1 = chrono::high_resolution_clock::now();
     //Check time 
@@ -71,7 +73,20 @@ int main() {
     //Start new clock
     auto start2 = chrono::high_resolution_clock::now(); 
     //Parallel Processing
-
+    
+    for(int i = 1; i <= 200; i++){
+        // Image Path
+        string path = "E:/Bai Tap/Lap trinh song song/ImageProcessing/imagetest/meo_xe_tang ";
+        path += "(";
+        path += to_string(i);
+        path += ")";
+        path += ".jpg";
+        Mat image1 = imread(path, IMREAD_COLOR);
+        if (image1.empty()) {
+            cout << "Can't read image" << endl;
+            return -1;
+        }
+        int processor = 4;
     //YCrCB OpenMP
     Mat YCrCBImP= ParallelYCrCBImage(image1,processor);
     
@@ -87,14 +102,16 @@ int main() {
     //Brightness OpenMP
     Mat BrightImP= ParallelBrightNess(image1, -100,processor);
 
+    cout << "Image: "<<i<<"finish"<<endl;
+    }
     //End clock
     auto end2 = chrono::high_resolution_clock::now(); 
 
     //Get OpenMP Processing Time
     chrono::duration<double> duration2 = end2 - start2;
     cout <<"Parallel OpenMP time: "<<duration2.count()<<"s"<<endl;
-    //Compare Result
-    if(compare(YCrCBIm,YCrCBImP)){
+    //Compare Result*/
+    /*if(compare(YCrCBIm,YCrCBImP)){
         cout <<"YCrCB OpenMP true"<<endl;
     }else
     {
@@ -123,7 +140,7 @@ int main() {
     }else
     {
         cout <<"Sharpness OpenMP false"<<endl;
-    }
+    }*/
     //Start Platform OpenCL
     //Check Device
     
@@ -131,6 +148,18 @@ int main() {
 
     //Start new clock
     auto start3 = chrono::high_resolution_clock::now(); 
+    for(int i = 1; i <= 200; i++){
+        // Image Path
+        string path = "E:/Bai Tap/Lap trinh song song/ImageProcessing/imagetest/meo_xe_tang ";
+        path += "(";
+        path += to_string(i);
+        path += ")";
+        path += ".jpg";
+        Mat image1 = imread(path, IMREAD_COLOR);
+        if (image1.empty()) {
+            cout << "Can't read image" << endl;
+            return -1;
+        }
 
     //Brightness OpenCL
     Mat BrightImCL= ParallelBrightnessOpenCL(image1, -100);
@@ -142,15 +171,18 @@ int main() {
     Mat BlurImCL = ParallelBlurOpenCL(image1, 1);
 
     Mat SharpImCL = ParallelSharpnessOpenCL(image1, 5);
+
+    cout << "Image: "<<i<<"finish"<<endl;
+    }
     //End Clock
     auto end3 = chrono::high_resolution_clock::now(); 
     //Check Image
-    imshow("YCrCBImCL", YCrCBImCL);
+    //imshow("YCrCBImCL", YCrCBImCL);
     //imshow("BrightImCL", BrightImCL);
     //imshow("SatImCL", SatImCL);
     //imshow("BlurImCL", BlurImCL);
     //imshow("SharpImCL", SharpImCL);
-    if(compare(YCrCBIm,YCrCBImCL)){
+    /*if(compare(YCrCBIm,YCrCBImCL)){
         cout <<"YCrCB OpenCL true"<<endl;
     }else
     {
@@ -179,11 +211,11 @@ int main() {
     }else
     {
         cout <<"Sharp OpenCL false"<<endl;
-    }
-
+    }*/
     //Get OpenCL Processing Time
     chrono::duration<double> duration3 = end3 - start3;
     cout <<"Thoi gian thuc thi song song openCL: "<<duration3.count()<<"s"<<endl;
+    // Read Image
     waitKey(0);
     return 0;
 }

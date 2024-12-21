@@ -32,7 +32,7 @@ vector<vector<float>> ParallelcreateGaussianKernel(int size, float sigma) {
     return kernel;
 }
 Mat ParallelBlurImage(Mat &input, float blur, int process){
-    auto startSequence = chrono::high_resolution_clock::now(); 
+    //auto startSequence = chrono::high_resolution_clock::now(); 
     vector<vector<float>> kernel = ParallelcreateGaussianKernel(7, blur);
     int halfSize = 7 / 2;
     Mat result = Mat::zeros(input.rows,input.cols,CV_8UC3);
@@ -40,7 +40,7 @@ Mat ParallelBlurImage(Mat &input, float blur, int process){
     int cols=input.cols;
     omp_set_num_threads(process);
     // Duyệt qua từng pixel trong hình ảnh parallel this, each thread will reponsible for block of input
-    auto start2 = chrono::high_resolution_clock::now();
+    //auto start2 = chrono::high_resolution_clock::now();
     #pragma omp parallel for collapse(2) shared(input, result)
     for ( int i = 0; i < rows; ++i){
         for (int j = 0; j < cols; ++j) {
@@ -63,12 +63,12 @@ Mat ParallelBlurImage(Mat &input, float blur, int process){
             result.at<Vec3b>(i, j) = Vec3b(static_cast<uchar>(sum[0]), static_cast<uchar>(sum[1]), static_cast<uchar>(sum[2]));
         }
     }
-    auto end2 = chrono::high_resolution_clock::now(); 
+    /*auto end2 = chrono::high_resolution_clock::now(); 
     auto endSequence = chrono::high_resolution_clock::now(); 
     chrono::duration<double> duration2 = end2 - start2;
     cout <<"Blur Parralel Time: "<<duration2.count()<<"s"<<endl;
     chrono::duration<double> durationSequence = endSequence - startSequence;
-    cout <<"Blur Process Time: "<<durationSequence.count()<<"s"<<endl;
+    cout <<"Blur Process Time: "<<durationSequence.count()<<"s"<<endl;*/
     return result;
 }
 

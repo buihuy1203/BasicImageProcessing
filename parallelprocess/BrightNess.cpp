@@ -10,11 +10,11 @@
 using namespace std;
 using namespace cv;
 Mat ParallelBrightNess(Mat &input, int bright, int process){
-    auto startSequence = chrono::high_resolution_clock::now(); 
+    //auto startSequence = chrono::high_resolution_clock::now(); 
     Mat result =  Mat::zeros(input.rows, input.cols, CV_8UC3);
     int procs_num=process;
     omp_set_num_threads(procs_num);
-    auto startParrallel = chrono::high_resolution_clock::now(); 
+    //auto startParrallel = chrono::high_resolution_clock::now(); 
     #pragma omp parallel for collapse(2) shared(input, result)
     for(int y=0; y < input.rows; y++){
          for(int x = 0; x < input.cols; x++){
@@ -26,81 +26,60 @@ Mat ParallelBrightNess(Mat &input, int bright, int process){
          }
     }
     /*
-    #pragma omp parallel for collapse(2)   
-    for (int y = 0; y < input.rows; y++) {
-    // Truy cập trực tiếp vào bộ nhớ của input và result
-    uchar* input_row = input.ptr<uchar>(y);  // Dữ liệu dòng y của input
-    uchar* result_row = result.ptr<uchar>(y);  // Dữ liệu dòng y của result
-    
-    for (int x = 0; x < input.cols; x++) {
-        // Truy xuất từng pixel trực tiếp
-        uchar* input_pixel = input_row + x * 3;  // Mỗi pixel có 3 giá trị (RGB)
-        uchar* result_pixel = result_row + x * 3;  // Dòng kết quả
-        
-        // Lấy giá trị RGB
-        uchar blue = input_pixel[0];
-        uchar green = input_pixel[1];
-        uchar red = input_pixel[2];
-
-        // Cộng sáng cho mỗi kênh và gán vào kết quả
-        result_pixel[0] = saturate_cast<uchar>(blue + bright);
-        result_pixel[1] = saturate_cast<uchar>(green + bright);
-        result_pixel[2] = saturate_cast<uchar>(red + bright);   
-    }
-    }*/
     auto endParralel = chrono::high_resolution_clock::now(); 
     auto endSequence = chrono::high_resolution_clock::now(); 
     chrono::duration<double> durationSequence = endSequence - startSequence;
     chrono::duration<double> durationParallel = endParralel - startParrallel;
     cout <<"Brightness Process Time: "<<durationSequence.count()<<"s"<<endl;
     cout <<"Brightness Parallel Time: "<<durationParallel.count()<<"s"<<endl;
+    */
     return result;
 }
 
 Mat ParallelBrightnessOpenCL(Mat &input, int bright) {
-    // Kích thước ảnh
+    // Image Size
     int rows = input.rows;
     int cols = input.cols;
 
-    // Tạo mảng đầu vào và đầu ra
+    // Input Output Data
     vector<uchar> inputData(input.rows * input.cols * 3);
     vector<uchar> outputData(input.rows * input.cols * 3);
     memcpy(inputData.data(), input.data, input.total() * input.elemSize());
 
-    // Khởi tạo OpenCL
+    // OpenCL Initialization
     vector<cl::Platform> platforms;
     cl::Platform::get(&platforms);
     if (platforms.empty()) {
         throw runtime_error("No OpenCL platforms found.");
     }
 
-    cl::Platform platform = platforms[0]; // Chọn nền tảng đầu tiên
+    cl::Platform platform = platforms[0]; 
     vector<cl::Device> devices;
     platform.getDevices(CL_DEVICE_TYPE_GPU, &devices);
     if (devices.empty()) {
         throw std::runtime_error("No OpenCL devices found on platform.");
     }
 
-    cl::Device device = devices[0]; // Chọn thiết bị đầu tiên
+    cl::Device device = devices[0];
     cl::Context context({device});
     cl::Program::Sources sources;
 
-    // Đọc kernel từ file
+    // Kernel Source
     string kernel_code = loadKernelSourceFile("kernel/brightness.cl");
     sources.push_back({kernel_code.c_str(), kernel_code.length()});
 
     cl::Program program(context, sources);
     program.build({device});
 
-    // Tạo buffer
+    // Buffer Initialization
     cl::Buffer bufferInput(context, CL_MEM_READ_ONLY, inputData.size());
     cl::Buffer bufferOutput(context, CL_MEM_WRITE_ONLY, outputData.size());
 
-    // Gửi dữ liệu lên thiết bị
+    // Send data to device
     cl::CommandQueue queue(context, device);
     queue.enqueueWriteBuffer(bufferInput, CL_TRUE, 0, inputData.size(), inputData.data());
 
-    // Tạo kernel
+    // Kernel Initialization
     cl::Kernel kernel(program, "brightness");
     kernel.setArg(0, bufferInput);
     kernel.setArg(1, bufferOutput);
@@ -108,13 +87,13 @@ Mat ParallelBrightnessOpenCL(Mat &input, int bright) {
     kernel.setArg(3, cols);
     kernel.setArg(4, bright);
 
-    // Thiết lập kích thước công việc
+    // Work Size
     cl::NDRange global(rows, cols);
     queue.enqueueNDRangeKernel(kernel, cl::NullRange, global, cl::NullRange);
 
-    // Lấy kết quả từ thiết bị
+    // Read Result
     queue.enqueueReadBuffer(bufferOutput, CL_TRUE, 0, outputData.size(), outputData.data());
-    // Chuyển đổi dữ liệu thành Mat
+    // Convert Result
     Mat result(input.size(), CV_8UC3); // Đảm bảo khớp định dạng
     memcpy(result.data, outputData.data(), outputData.size());
     return result;

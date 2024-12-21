@@ -10,7 +10,7 @@ using namespace std;
 using namespace cv;
 
 Mat ParallelSharpness(const Mat &input, double sharp, int process){
-    auto startSequence = chrono::high_resolution_clock::now(); 
+    //auto startSequence = chrono::high_resolution_clock::now(); 
     int procs_num= process;
     omp_set_num_threads(procs_num);
     Mat result = Mat::zeros(input.size(), input.type());
@@ -21,7 +21,7 @@ Mat ParallelSharpness(const Mat &input, double sharp, int process){
         {1, -4, 1},
         {0, 1, 0}
     };
-    auto startParrallel = chrono::high_resolution_clock::now(); 
+    //auto startParrallel = chrono::high_resolution_clock::now(); 
     #pragma omp parallel for collapse(2) shared(grayImage, result)
         for (int i = 1; i < grayImage.rows - 1; ++i) {
             for (int j = 1; j < grayImage.cols - 1; ++j) {
@@ -46,12 +46,14 @@ Mat ParallelSharpness(const Mat &input, double sharp, int process){
             }
         }
     }
+    /*
     auto endParralel = chrono::high_resolution_clock::now(); 
     auto endSequence = chrono::high_resolution_clock::now(); 
     chrono::duration<double> durationSequence = endSequence - startSequence;
     chrono::duration<double> durationParallel = endParralel - startParrallel;
     cout <<"Sharpness Process Time: "<<durationSequence.count()<<"s"<<endl;
     cout <<"Sharness Parallel Time: "<<durationParallel.count()<<"s"<<endl;
+    */
     return sharpenedImage;
 }
 
