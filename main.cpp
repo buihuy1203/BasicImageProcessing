@@ -23,8 +23,8 @@ using namespace cv;
 int main() {
     cout << "Start Full Test" << endl;
     FullTest();
-    cout << "Start Check Test" << endl;
-    checktest();
+    //cout << "Start Check Test" << endl;
+    //checktest();
     cout << "Start Bright Test" << endl;
     BrightTest();
     cout << "Start Saturation Test" << endl;

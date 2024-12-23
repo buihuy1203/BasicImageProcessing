@@ -21,6 +21,8 @@ if(OpenMP_CXX_FOUND)
     target_link_libraries(ImageProcessing PUBLIC OpenMP::OpenMP_CXX)
 endif()
 
+set_target_properties(ImageProcessing PROPERTIES CUDA_SEPARABLE_COMPILATION ON)
+
 set(CPACK_PROJECT_NAME ${PROJECT_NAME})
 set(CPACK_PROJECT_VERSION ${PROJECT_VERSION})
 include(CPack)

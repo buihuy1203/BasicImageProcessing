@@ -1,6 +1,6 @@
 void YCrCbTest(){
     ofstream myfile;
-    myfile.open ("log.txt");
+    myfile.open ("log.txt", ios_base::app);
     auto start1 = chrono::high_resolution_clock::now(); 
     for(int i = 1; i <= 200; i++){
         // Image Path
@@ -93,7 +93,7 @@ void YCrCbTest(){
 
 void BrightTest(){
     ofstream myfile;
-    myfile.open ("log.txt");
+    myfile.open ("log.txt", ios_base::app);
     auto start1 = chrono::high_resolution_clock::now(); 
     for(int i = 1; i <= 200; i++){
         // Image Path
@@ -186,7 +186,7 @@ void BrightTest(){
 
 void SharpTest(){
     ofstream myfile;
-    myfile.open ("log.txt");
+    myfile.open ("log.txt", ios_base::app);
     auto start1 = chrono::high_resolution_clock::now(); 
     for(int i = 1; i <= 200; i++){
         // Image Path
@@ -280,7 +280,7 @@ void SharpTest(){
 
 void SatTest(){
     ofstream myfile;
-    myfile.open ("log.txt");
+    myfile.open ("log.txt", ios_base::app);
     auto start1 = chrono::high_resolution_clock::now(); 
     for(int i = 1; i <= 200; i++){
         // Image Path
@@ -376,7 +376,7 @@ void SatTest(){
 
 void BlurTest(){
     ofstream myfile;
-    myfile.open ("log.txt");
+    myfile.open ("log.txt", ios_base::app);
     auto start1 = chrono::high_resolution_clock::now(); 
     for(int i = 1; i <= 200; i++){
         // Image Path

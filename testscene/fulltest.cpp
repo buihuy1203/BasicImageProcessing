@@ -1,6 +1,6 @@
 void FullTest(){
     ofstream myfile;
-    myfile.open ("log.txt");
+    myfile.open ("log.txt", ios_base::app);
     auto start1 = chrono::high_resolution_clock::now(); 
     for(int i = 1; i <= 200; i++){
         // Image Path
