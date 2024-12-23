@@ -6,6 +6,10 @@
 using namespace cv;
 using namespace std;
 
+__device__ int clamp(int value, int low, int high) {
+    return max(low, min(value, high));
+}
+
 __global__ void satKernel(const uchar *input, uchar *output, int rows, int cols, float set_sar) {
     int x = blockIdx.x * blockDim.x + threadIdx.x;
     int y = blockIdx.y * blockDim.y + threadIdx.y;

@@ -6,6 +6,7 @@
 using namespace cv;
 using namespace std;
 
+
 __global__ void yCrCBKernel(const uchar *input, uchar *output, int rows, int cols) {
     int x = blockIdx.x * blockDim.x + threadIdx.x;
     int y = blockIdx.y * blockDim.y + threadIdx.y;

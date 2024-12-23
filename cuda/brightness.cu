@@ -6,15 +6,19 @@
 using namespace cv;
 using namespace std;
 
+__device__ int clamp(int value, int low, int high) {
+    return max(low, min(value, high));
+}
+
 __global__ void brightnessKernel(const uchar *input, uchar *output, int rows, int cols, int bright) {
     int x = blockIdx.x * blockDim.x + threadIdx.x;
     int y = blockIdx.y * blockDim.y + threadIdx.y;
 
     if (y < rows && x < cols) {
         int idx = (y * cols + x) * 3;
-        output[idx] = min(max(input[idx] + bright, 0), 255);         // Blue
-        output[idx + 1] = min(max(input[idx + 1] + bright, 0), 255); // Green
-        output[idx + 2] = min(max(input[idx + 2] + bright, 0), 255); // Red
+        output[idx]= (uchar)clamp(input[idx]+(float)bright,0.0f,255.0f); // Blue
+        output[idx + 1] = (uchar)clamp(input[idx+1]+(float)bright,0.0f,255.0f); // Green
+        output[idx + 2] = (uchar)clamp(input[idx+2]+(float)bright,0.0f,255.0f); // Red
     }
 }
 

@@ -6,6 +6,10 @@
 using namespace cv;
 using namespace std;
 
+__device__ int clamp(int value, int low, int high) {
+    return max(low, min(value, high));
+}
+
 __global__ void sharpenKernel(const uchar *input, uchar *output, int rows, int cols) {
     int x = blockIdx.x * blockDim.x + threadIdx.x;
     int y = blockIdx.y * blockDim.y + threadIdx.y;
@@ -15,12 +19,12 @@ __global__ void sharpenKernel(const uchar *input, uchar *output, int rows, int c
             {1, -4, 1},
             {0, 1, 0}
         };
-    if (y > 0 && y < height - 1 && x > 0 && x < width - 1) {
+    if (y > 0 && y < rows - 1 && x > 0 && x < cols - 1) {
         int sum = 0;
         for (int k = -1; k <= 1; ++k) {
             for (int l = -1; l <= 1; ++l) {
-                if ((y + k) >= 0 && (y + k) < height && (x + l) >= 0 && (x + l) < width) {
-                    sum += kernel2D[k + 1][l + 1] * inputBuffer[(y + k) * width + (x + l)];
+                if ((y + k) >= 0 && (y + k) < rows && (x + l) >= 0 && (x + l) < cols) {
+                    sum += kernel2D[k + 1][l + 1] * inputBuffer[(y + k) * cols + (x + l)];
                 }
             }
         }
@@ -80,7 +84,7 @@ Mat ParallelSharpCUDA(Mat &input, float sharp_var) {
     cudaMemcpy(result.data, d_output, dataSize, cudaMemcpyDeviceToHost);
 
     // Free device memory
-    cudaFree(d_inputGray);
+    cudaFree(d_inputData);
     cudaFree(d_output);
     cudaFree(d_result);
     cudaFree(d_inputColor);
