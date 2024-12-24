@@ -76,7 +76,7 @@ Mat ParallelSharpnessOpenCL(const Mat& input, float sharp_var) {
     // Initialize OpenCL
     vector<cl::Platform> platforms;
     cl::Platform::get(&platforms);
-    cl::Platform platform = platforms[1];
+    cl::Platform platform = platforms[0];
 
     vector<cl::Device> devices;
     platform.getDevices(CL_DEVICE_TYPE_GPU, &devices);

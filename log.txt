@@ -96,3 +96,15 @@ Parallel OpenCL time Sat: 140.108s
 Parallel OpenCL time Sat main: 0s
 Parallel OpenCL time Sharp: 118.558s
 Parallel OpenCL time Sharp main: 0s
+Parallel OpenCL time total: 212.98s
+Parallel OpenCL time main: 0s
+Parallel OpenCL time Bright: 91.5458s
+Parallel OpenCL time Bright main: 0s
+Parallel OpenCL time Sat: 94.7694s
+Parallel OpenCL time Sat main: 0s
+Parallel OpenCL time Sharp: 90.3267s
+Parallel OpenCL time Sharp main: 0s
+Parallel OpenCL time Blur: 86.3738s
+Parallel OpenCL time Blur main: 0s
+Parallel OpenCL time YCrCb: 78.7921s
+Parallel OpenCL time YCrCb main: 0s

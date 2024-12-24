@@ -1,0 +1,120 @@
+Parallel OpenCL time total: 0.0011769s
+Parallel OpenCL time main: 0s
+Parallel OpenCL time Bright: 0.000261s
+Parallel OpenCL time Bright main: 0s
+Parallel OpenCL time Sat: 0.0002746s
+Parallel OpenCL time Sat main: 0s
+Parallel OpenCL time Sharp: 0.0002528s
+Parallel OpenCL time Sharp main: 0s
+Parallel OpenCL time Blur: 0.0001923s
+Parallel OpenCL time Blur main: 0s
+Parallel OpenCL time YCrCb: 0.0005714s
+Parallel OpenCL time YCrCb main: 0s
+Parallel OpenCL time total: 0.0010372s
+Parallel OpenCL time main: 0s
+Parallel OpenCL time Bright: 0.0002418s
+Parallel OpenCL time Bright main: 0s
+Parallel OpenCL time Sat: 0.0003729s
+Parallel OpenCL time Sat main: 0s
+Parallel OpenCL time Sharp: 0.0002649s
+Parallel OpenCL time Sharp main: 0s
+Parallel OpenCL time Blur: 0.0004397s
+Parallel OpenCL time Blur main: 0s
+Parallel OpenCL time YCrCb: 0.0003574s
+Parallel OpenCL time YCrCb main: 0s
+Parallel OpenCL time total: 0.0014322s
+Parallel OpenCL time main: 0s
+Parallel OpenCL time Bright: 0.0005555s
+Parallel OpenCL time Bright main: 0s
+Parallel OpenCL time Sat: 0.0002354s
+Parallel OpenCL time Sat main: 0s
+Parallel OpenCL time Sharp: 0.0001942s
+Parallel OpenCL time Sharp main: 0s
+Parallel OpenCL time Blur: 0.0001488s
+Parallel OpenCL time Blur main: 0s
+Parallel OpenCL time YCrCb: 0.000323s
+Parallel OpenCL time YCrCb main: 0s
+Parallel OpenCL time total: 0.0006963s
+Parallel OpenCL time main: 0s
+Parallel OpenCL time Bright: 0.0002396s
+Parallel OpenCL time Bright main: 0s
+Parallel OpenCL time Sat: 0.0001386s
+Parallel OpenCL time Sat main: 0s
+Parallel OpenCL time Sharp: 0.0001609s
+Parallel OpenCL time Sharp main: 0s
+Parallel OpenCL time Blur: 0.0001573s
+Parallel OpenCL time Blur main: 0s
+Parallel OpenCL time YCrCb: 0.0004073s
+Parallel OpenCL time YCrCb main: 0s
+Parallel OpenCL time total: 0.000807s
+Parallel OpenCL time main: 0s
+Parallel OpenCL time Bright: 0.0005164s
+Parallel OpenCL time Bright main: 0s
+Parallel OpenCL time Sat: 0.0004128s
+Parallel OpenCL time Sat main: 0s
+Parallel OpenCL time Sharp: 0.0003645s
+Parallel OpenCL time Sharp main: 0s
+Parallel OpenCL time Blur: 0.000602s
+Parallel OpenCL time Blur main: 0s
+Parallel OpenCL time YCrCb: 0.0004211s
+Parallel OpenCL time YCrCb main: 0s
+Parallel OpenCL time total: 0.0008682s
+Parallel OpenCL time main: 0s
+Parallel OpenCL time Bright: 0.0002112s
+Parallel OpenCL time Bright main: 0s
+Parallel OpenCL time Sat: 0.0001294s
+Parallel OpenCL time Sat main: 0s
+Parallel OpenCL time Sharp: 0.0001428s
+Parallel OpenCL time Sharp main: 0s
+Parallel OpenCL time Blur: 0.0002795s
+Parallel OpenCL time Blur main: 0s
+Parallel OpenCL time YCrCb: 0.0003369s
+Parallel OpenCL time YCrCb main: 0s
+Parallel OpenCL time total: 0.0010587s
+Parallel OpenCL time main: 0s
+Parallel OpenCL time Bright: 0.0003151s
+Parallel OpenCL time Bright main: 0s
+Parallel OpenCL time Sat: 0.0001899s
+Parallel OpenCL time Sat main: 0s
+Parallel OpenCL time Sharp: 0.0001517s
+Parallel OpenCL time Sharp main: 0s
+Parallel OpenCL time Blur: 0.0001836s
+Parallel OpenCL time Blur main: 0s
+Parallel OpenCL time YCrCb: 0.0003564s
+Parallel OpenCL time YCrCb main: 0s
+Parallel OpenCL time total: 0.000951s
+Parallel OpenCL time main: 0s
+Parallel OpenCL time Bright: 0.0001903s
+Parallel OpenCL time Bright main: 0s
+Parallel OpenCL time Sat: 0.0002071s
+Parallel OpenCL time Sat main: 0s
+Parallel OpenCL time Sharp: 0.0001968s
+Parallel OpenCL time Sharp main: 0s
+Parallel OpenCL time Blur: 0.0001679s
+Parallel OpenCL time Blur main: 0s
+Parallel OpenCL time YCrCb: 0.0003287s
+Parallel OpenCL time YCrCb main: 0s
+Parallel OpenCL time total: 0.0009706s
+Parallel OpenCL time main: 0s
+Parallel OpenCL time Bright: 9.25e-05s
+Parallel OpenCL time Bright main: 0s
+Parallel OpenCL time Sat: 8.65e-05s
+Parallel OpenCL time Sat main: 0s
+Parallel OpenCL time Sharp: 0.0001418s
+Parallel OpenCL time Sharp main: 0s
+Parallel OpenCL time Blur: 9.25e-05s
+Parallel OpenCL time Blur main: 0s
+Parallel OpenCL time YCrCb: 0.0001232s
+Parallel OpenCL time YCrCb main: 0s
+Parallel OpenCL time total: 0.0012026s
+Parallel OpenCL time main: 0s
+Parallel OpenCL time Bright: 0.0002231s
+Parallel OpenCL time Bright main: 0s
+Parallel OpenCL time Sat: 0.0001359s
+Parallel OpenCL time Sat main: 0s
+Parallel OpenCL time Sharp: 0.0001569s
+Parallel OpenCL time Sharp main: 0s
+Parallel OpenCL time Blur: 0.0001169s
+Parallel OpenCL time Blur main: 0s
+Parallel OpenCL time YCrCb: 0.0001114s
+Parallel OpenCL time YCrCb main: 0s

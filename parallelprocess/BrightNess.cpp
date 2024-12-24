@@ -57,7 +57,7 @@ Mat ParallelBrightnessOpenCL(Mat &input, int bright) {
         throw runtime_error("No OpenCL platforms found.");
     }
 
-    cl::Platform platform = platforms[1]; 
+    cl::Platform platform = platforms[0]; 
     vector<cl::Device> devices;
     platform.getDevices(CL_DEVICE_TYPE_GPU, &devices);
     if (devices.empty()) {

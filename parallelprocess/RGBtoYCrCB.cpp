@@ -61,7 +61,7 @@ Mat ParallelYCrCBOpenCL(Mat &input) {
         throw runtime_error("No OpenCL platforms found.");
     }
 
-    cl::Platform platform = platforms[1]; // Chọn nền tảng đầu tiên
+    cl::Platform platform = platforms[0]; // Chọn nền tảng đầu tiên
     vector<cl::Device> devices;
     platform.getDevices(CL_DEVICE_TYPE_GPU, &devices);
     if (devices.empty()) {

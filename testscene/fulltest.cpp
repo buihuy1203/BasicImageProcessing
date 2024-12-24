@@ -16,7 +16,7 @@ void FullTest(){
     SatSeqTime = 0;
     ofstream myfile;
     myfile.open ("log.txt", ios_base::app);
-    /*auto start1 = chrono::high_resolution_clock::now(); 
+    auto start1 = chrono::high_resolution_clock::now(); 
     for(int i = 1; i <= 200; i++){
         // Image Path
         string path = "imagetest/meo_xe_tang ";
@@ -98,7 +98,7 @@ void FullTest(){
     cout <<"Parallel OpenMP time: "<<duration2.count()<<"s"<<endl;
     myfile <<"Parallel OpenMP time total: "<<duration2.count()<<"s"<<endl;
     myfile <<"Parallel OpenMP time main: "<<(BlurMPTime + SharpMPTime + BrightMPTime + SatMPTime + YCrCBMPTime)<<"s"<<endl;
-    *///Start Platform OpenCL
+    //Start Platform OpenCL
     //Check Device
     
     std::vector<cl::Platform> platforms;
