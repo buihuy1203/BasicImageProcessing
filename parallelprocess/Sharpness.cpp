@@ -76,7 +76,7 @@ Mat ParallelSharpnessOpenCL(const Mat& input, float sharp_var) {
     // Initialize OpenCL
     vector<cl::Platform> platforms;
     cl::Platform::get(&platforms);
-    cl::Platform platform = platforms[0];
+    cl::Platform platform = platforms[1];
 
     vector<cl::Device> devices;
     platform.getDevices(CL_DEVICE_TYPE_GPU, &devices);
@@ -120,13 +120,16 @@ Mat ParallelSharpnessOpenCL(const Mat& input, float sharp_var) {
 
     // Run kernels
     cl::NDRange global(cols, rows);
-    auto start = std::chrono::high_resolution_clock::now();
+    cl::Event event;
     queue.enqueueNDRangeKernel(sharpenKernel, cl::NullRange, global, cl::NullRange);
     queue.enqueueNDRangeKernel(applySharpnessKernel, cl::NullRange, global, cl::NullRange);
-    queue.finish();
-    auto end = std::chrono::high_resolution_clock::now();
-    chrono::duration<double> duration = end - start; // Thời gian chạy kernel (ms)
-    SharpCLTime += duration.count();
+    event.wait();
+    cl_ulong startTime = 0;
+    cl_ulong endTime = 0;
+    event.getProfilingInfo(CL_PROFILING_COMMAND_START, &startTime);
+    event.getProfilingInfo(CL_PROFILING_COMMAND_END, &endTime);
+    double kernelTime = (endTime - startTime) / 1.0e9;
+    SharpCLTime += kernelTime;
 
     // Read back the result into outputData
     queue.enqueueReadBuffer(sharpResultBuffer, CL_TRUE, 0, outputData.size(), outputData.data());

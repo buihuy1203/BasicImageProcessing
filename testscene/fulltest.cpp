@@ -16,7 +16,7 @@ void FullTest(){
     SatSeqTime = 0;
     ofstream myfile;
     myfile.open ("log.txt", ios_base::app);
-    auto start1 = chrono::high_resolution_clock::now(); 
+    /*auto start1 = chrono::high_resolution_clock::now(); 
     for(int i = 1; i <= 200; i++){
         // Image Path
         string path = "imagetest/meo_xe_tang ";
@@ -98,11 +98,18 @@ void FullTest(){
     cout <<"Parallel OpenMP time: "<<duration2.count()<<"s"<<endl;
     myfile <<"Parallel OpenMP time total: "<<duration2.count()<<"s"<<endl;
     myfile <<"Parallel OpenMP time main: "<<(BlurMPTime + SharpMPTime + BrightMPTime + SatMPTime + YCrCBMPTime)<<"s"<<endl;
-    //Start Platform OpenCL
+    *///Start Platform OpenCL
     //Check Device
     
-    //listPlatformsAndDevices();
-
+    std::vector<cl::Platform> platforms;
+    cl::Platform::get(&platforms);
+    for (auto &platform : platforms) {
+        std::vector<cl::Device> devices;
+        platform.getDevices(CL_DEVICE_TYPE_ALL, &devices);
+        for (auto &device : devices) {
+            std::cout << "Platform: " << platform.getInfo<CL_PLATFORM_NAME>() << ", Device: " << device.getInfo<CL_DEVICE_NAME>() << std::endl;
+        }
+    }
     //Start new clock
     auto start3 = chrono::high_resolution_clock::now(); 
     for(int i = 1; i <= 200; i++){
@@ -137,6 +144,6 @@ void FullTest(){
     chrono::duration<double> duration3 = end3 - start3;
     cout <<"Parallel OpenCL time: "<<duration3.count()<<"s"<<endl;
     myfile <<"Parallel OpenCL time total: "<<duration3.count()<<"s"<<endl;
-    myfile <<"Parallel OpenMP time main: "<<(BlurCLTime + SharpCLTime + BrightCLTime + SatCLTime + YCrCBCLTime)<<"s"<<endl;
+    myfile <<"Parallel OpenCL time main: "<<(BlurCLTime + SharpCLTime + BrightCLTime + SatCLTime + YCrCBCLTime)<<"s"<<endl;
     myfile.close();
 }

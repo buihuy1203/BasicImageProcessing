@@ -61,7 +61,7 @@ Mat ParallelYCrCBOpenCL(Mat &input) {
         throw runtime_error("No OpenCL platforms found.");
     }
 
-    cl::Platform platform = platforms[0]; // Chọn nền tảng đầu tiên
+    cl::Platform platform = platforms[1]; // Chọn nền tảng đầu tiên
     vector<cl::Device> devices;
     platform.getDevices(CL_DEVICE_TYPE_GPU, &devices);
     if (devices.empty()) {
@@ -96,12 +96,15 @@ Mat ParallelYCrCBOpenCL(Mat &input) {
 
     // Thiết lập kích thước công việc
     cl::NDRange global(rows, cols);
-    auto start = std::chrono::high_resolution_clock::now();
+    cl::Event event;
     queue.enqueueNDRangeKernel(kernel, cl::NullRange, global, cl::NullRange);
-    queue.finish();
-    auto end = std::chrono::high_resolution_clock::now();
-    chrono::duration<double> duration = end - start; // Thời gian chạy kernel (ms)
-    YCrCBCLTime += duration.count();
+    event.wait();
+    cl_ulong startTime = 0;
+    cl_ulong endTime = 0;
+    event.getProfilingInfo(CL_PROFILING_COMMAND_START, &startTime);
+    event.getProfilingInfo(CL_PROFILING_COMMAND_END, &endTime);
+    double kernelTime = (endTime - startTime) / 1.0e9;
+    YCrCBCLTime += kernelTime;
     // Lấy kết quả từ thiết bị
     queue.enqueueReadBuffer(bufferOutput, CL_TRUE, 0, outputData.size(), outputData.data());
     

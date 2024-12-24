@@ -5,7 +5,7 @@ void YCrCbTest(){
     RGBtoYCrCBSeqTime = 0;
     ofstream myfile;
     myfile.open ("log.txt", ios_base::app);
-    auto start1 = chrono::high_resolution_clock::now(); 
+    /*auto start1 = chrono::high_resolution_clock::now(); 
     for(int i = 1; i <= 200; i++){
         // Image Path
         string path = "imagetest/meo_xe_tang ";
@@ -62,7 +62,7 @@ void YCrCbTest(){
     cout <<"Parallel OpenMP time: "<<duration2.count()<<"s"<<endl;
     myfile <<"Parallel OpenMP time YCrCB: "<<duration2.count()<<"s"<<endl;
     myfile <<"Parallel OpenMP time YCrCB main: "<<YCrCBMPTime<<"s"<<endl;
-    
+    */
     //Start Platform OpenCL
     //Check Device
     
@@ -104,7 +104,7 @@ void BrightTest(){
     BrightNessSeqTime = 0;
     ofstream myfile;
     myfile.open ("log.txt", ios_base::app);
-    auto start1 = chrono::high_resolution_clock::now(); 
+    /*auto start1 = chrono::high_resolution_clock::now(); 
     for(int i = 1; i <= 200; i++){
         // Image Path
         string path = "imagetest/meo_xe_tang ";
@@ -162,7 +162,7 @@ void BrightTest(){
     cout <<"Parallel OpenMP time Bright: "<<duration2.count()<<"s"<<endl;
     myfile <<"Parallel OpenMP time Bright: "<<duration2.count()<<"s"<<endl;
     myfile <<"Parallel OpenMP time Bright main: "<<BrightMPTime<<"s"<<endl;
-    //Start Platform OpenCL
+    *///Start Platform OpenCL
     //Check Device
     
     //listPlatformsAndDevices();
@@ -203,7 +203,7 @@ void SharpTest(){
     SharpSeqTime = 0;
     ofstream myfile;
     myfile.open ("log.txt", ios_base::app);
-    auto start1 = chrono::high_resolution_clock::now(); 
+    /*auto start1 = chrono::high_resolution_clock::now(); 
     for(int i = 1; i <= 200; i++){
         // Image Path
         string path = "imagetest/meo_xe_tang ";
@@ -262,7 +262,7 @@ void SharpTest(){
     cout <<"Parallel OpenMP time Sharp: "<<duration2.count()<<"s"<<endl;
     myfile <<"Parallel OpenMP time Sharp: "<<duration2.count()<<"s"<<endl;
     myfile <<"Parallel OpenMP time Sharp main: "<<SharpMPTime<<"s"<<endl;
-    //Start Platform OpenCL
+    *///Start Platform OpenCL
     //Check Device
     
     //listPlatformsAndDevices();
@@ -302,7 +302,7 @@ void SatTest(){
     SatSeqTime = 0;
     ofstream myfile;
     myfile.open ("log.txt", ios_base::app);
-    auto start1 = chrono::high_resolution_clock::now(); 
+    /*auto start1 = chrono::high_resolution_clock::now(); 
     for(int i = 1; i <= 200; i++){
         // Image Path
         string path = "imagetest/meo_xe_tang ";
@@ -362,7 +362,7 @@ void SatTest(){
     myfile <<"Parallel OpenMP time Sat: "<<duration2.count()<<"s"<<endl;
     myfile <<"Parallel OpenMP time Sat main: "<<SatMPTime<<"s"<<endl;
     
-    //Start Platform OpenCL
+    *///Start Platform OpenCL
     //Check Device
     
     //listPlatformsAndDevices();
@@ -404,7 +404,7 @@ void BlurTest(){
     BlurSeqTime = 0;
     ofstream myfile;
     myfile.open ("log.txt", ios_base::app);
-    auto start1 = chrono::high_resolution_clock::now(); 
+    /*auto start1 = chrono::high_resolution_clock::now(); 
     for(int i = 1; i <= 200; i++){
         // Image Path
         string path = "imagetest/meo_xe_tang ";
@@ -464,7 +464,7 @@ void BlurTest(){
     myfile <<"Parallel OpenMP time Blur: "<<duration2.count()<<"s"<<endl;
     myfile <<"Parallel OpenMP time Blur main: "<<BlurMPTime<<"s"<<endl;
     
-    //Start Platform OpenCL
+    *///Start Platform OpenCL
     //Check Device
     
     //listPlatformsAndDevices();
