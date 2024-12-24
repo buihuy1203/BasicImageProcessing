@@ -1,10 +1,14 @@
+
 void YCrCbTest(){
+    YCrCBMPTime = 0;
+    YCrCBCLTime = 0;
+    RGBtoYCrCBSeqTime = 0;
     ofstream myfile;
     myfile.open ("log.txt", ios_base::app);
     auto start1 = chrono::high_resolution_clock::now(); 
     for(int i = 1; i <= 200; i++){
         // Image Path
-        string path = "E:/Bai Tap/Lap trinh song song/ImageProcessing/imagetest/meo_xe_tang ";
+        string path = "imagetest/meo_xe_tang ";
         path += "(";
         path += to_string(i);
         path += ")";
@@ -27,13 +31,14 @@ void YCrCbTest(){
     chrono::duration<double> duration1 = end1 - start1;
     cout <<"Sequence time: "<<duration1.count()<<"s"<<endl;
     myfile <<"Sequence time YCrCB: "<<duration1.count()<<"s"<<endl;
+    myfile <<"Sequence time YCrCB main: "<<RGBtoYCrCBSeqTime<<"s"<<endl;
     //Start new clock
     auto start2 = chrono::high_resolution_clock::now(); 
     //Parallel Processing
     
     for(int i = 1; i <= 200; i++){
         // Image Path
-        string path = "E:/Bai Tap/Lap trinh song song/ImageProcessing/imagetest/meo_xe_tang ";
+        string path = "imagetest/meo_xe_tang ";
         path += "(";
         path += to_string(i);
         path += ")";
@@ -56,6 +61,7 @@ void YCrCbTest(){
     chrono::duration<double> duration2 = end2 - start2;
     cout <<"Parallel OpenMP time: "<<duration2.count()<<"s"<<endl;
     myfile <<"Parallel OpenMP time YCrCB: "<<duration2.count()<<"s"<<endl;
+    myfile <<"Parallel OpenMP time YCrCB main: "<<YCrCBMPTime<<"s"<<endl;
     
     //Start Platform OpenCL
     //Check Device
@@ -66,7 +72,7 @@ void YCrCbTest(){
     auto start3 = chrono::high_resolution_clock::now(); 
     for(int i = 1; i <= 200; i++){
         // Image Path
-        string path = "E:/Bai Tap/Lap trinh song song/ImageProcessing/imagetest/meo_xe_tang ";
+        string path = "imagetest/meo_xe_tang ";
         path += "(";
         path += to_string(i);
         path += ")";
@@ -87,17 +93,21 @@ void YCrCbTest(){
     chrono::duration<double> duration3 = end3 - start3;
     cout <<"Parallel OpenCL time YCrCb: "<<duration3.count()<<"s"<<endl;
     myfile <<"Parallel OpenCL time YCrCb: "<<duration3.count()<<"s"<<endl;
+    myfile <<"Parallel OpenCL time YCrCb main: "<<YCrCBCLTime<<"s"<<endl;
     myfile.close();
     // Read Image
 }
 
 void BrightTest(){
+    BrightMPTime = 0;
+    BrightCLTime = 0;
+    BrightNessSeqTime = 0;
     ofstream myfile;
     myfile.open ("log.txt", ios_base::app);
     auto start1 = chrono::high_resolution_clock::now(); 
     for(int i = 1; i <= 200; i++){
         // Image Path
-        string path = "E:/Bai Tap/Lap trinh song song/ImageProcessing/imagetest/meo_xe_tang ";
+        string path = "imagetest/meo_xe_tang ";
         path += "(";
         path += to_string(i);
         path += ")";
@@ -120,13 +130,14 @@ void BrightTest(){
     chrono::duration<double> duration1 = end1 - start1;
     cout <<"Sequence time Bright: "<<duration1.count()<<"s"<<endl;
     myfile <<"Sequence time Bright: "<<duration1.count()<<"s"<<endl;
+    myfile <<"Sequence time Bright main: "<<BrightNessSeqTime<<"s"<<endl;
     //Start new clock
     auto start2 = chrono::high_resolution_clock::now(); 
     //Parallel Processing
     
     for(int i = 1; i <= 200; i++){
         // Image Path
-        string path = "E:/Bai Tap/Lap trinh song song/ImageProcessing/imagetest/meo_xe_tang ";
+        string path = "imagetest/meo_xe_tang ";
         path += "(";
         path += to_string(i);
         path += ")";
@@ -150,6 +161,7 @@ void BrightTest(){
     chrono::duration<double> duration2 = end2 - start2;
     cout <<"Parallel OpenMP time Bright: "<<duration2.count()<<"s"<<endl;
     myfile <<"Parallel OpenMP time Bright: "<<duration2.count()<<"s"<<endl;
+    myfile <<"Parallel OpenMP time Bright main: "<<BrightMPTime<<"s"<<endl;
     //Start Platform OpenCL
     //Check Device
     
@@ -159,7 +171,7 @@ void BrightTest(){
     auto start3 = chrono::high_resolution_clock::now(); 
     for(int i = 1; i <= 200; i++){
         // Image Path
-        string path = "E:/Bai Tap/Lap trinh song song/ImageProcessing/imagetest/meo_xe_tang ";
+        string path = "imagetest/meo_xe_tang ";
         path += "(";
         path += to_string(i);
         path += ")";
@@ -181,16 +193,20 @@ void BrightTest(){
     chrono::duration<double> duration3 = end3 - start3;
     cout <<"Parallel OpenCL time Bright: "<<duration3.count()<<"s"<<endl;
     myfile <<"Parallel OpenCL time Bright: "<<duration3.count()<<"s"<<endl;
+    myfile <<"Parallel OpenCL time Bright main: "<<BrightCLTime<<"s"<<endl;
     myfile.close();
 }
 
 void SharpTest(){
+    SharpMPTime = 0;
+    SharpCLTime = 0;
+    SharpSeqTime = 0;
     ofstream myfile;
     myfile.open ("log.txt", ios_base::app);
     auto start1 = chrono::high_resolution_clock::now(); 
     for(int i = 1; i <= 200; i++){
         // Image Path
-        string path = "E:/Bai Tap/Lap trinh song song/ImageProcessing/imagetest/meo_xe_tang ";
+        string path = "imagetest/meo_xe_tang ";
         path += "(";
         path += to_string(i);
         path += ")";
@@ -214,14 +230,14 @@ void SharpTest(){
     chrono::duration<double> duration1 = end1 - start1;
     cout <<"Sequence time Sharp: "<<duration1.count()<<"s"<<endl;
     myfile <<"Sequence time Sharp: "<<duration1.count()<<"s"<<endl;
-
+    myfile <<"Sequence time Sharp main: "<<SharpSeqTime<<"s"<<endl;
     //Start new clock
     auto start2 = chrono::high_resolution_clock::now(); 
     //Parallel Processing
     
     for(int i = 1; i <= 200; i++){
         // Image Path
-        string path = "E:/Bai Tap/Lap trinh song song/ImageProcessing/imagetest/meo_xe_tang ";
+        string path = "imagetest/meo_xe_tang ";
         path += "(";
         path += to_string(i);
         path += ")";
@@ -245,6 +261,7 @@ void SharpTest(){
     chrono::duration<double> duration2 = end2 - start2;
     cout <<"Parallel OpenMP time Sharp: "<<duration2.count()<<"s"<<endl;
     myfile <<"Parallel OpenMP time Sharp: "<<duration2.count()<<"s"<<endl;
+    myfile <<"Parallel OpenMP time Sharp main: "<<SharpMPTime<<"s"<<endl;
     //Start Platform OpenCL
     //Check Device
     
@@ -254,7 +271,7 @@ void SharpTest(){
     auto start3 = chrono::high_resolution_clock::now(); 
     for(int i = 1; i <= 200; i++){
         // Image Path
-        string path = "E:/Bai Tap/Lap trinh song song/ImageProcessing/imagetest/meo_xe_tang ";
+        string path = "imagetest/meo_xe_tang ";
         path += "(";
         path += to_string(i);
         path += ")";
@@ -275,16 +292,20 @@ void SharpTest(){
     chrono::duration<double> duration3 = end3 - start3;
     cout <<"Parallel OpenCL time Sharp: "<<duration3.count()<<"s"<<endl;
     myfile <<"Parallel OpenCL time Sharp: "<<duration3.count()<<"s"<<endl;
+    myfile <<"Parallel OpenCL time Sharp main: "<<SharpCLTime<<"s"<<endl;
     myfile.close();
 }
 
 void SatTest(){
+    SatMPTime = 0;
+    SatCLTime = 0;
+    SatSeqTime = 0;
     ofstream myfile;
     myfile.open ("log.txt", ios_base::app);
     auto start1 = chrono::high_resolution_clock::now(); 
     for(int i = 1; i <= 200; i++){
         // Image Path
-        string path = "E:/Bai Tap/Lap trinh song song/ImageProcessing/imagetest/meo_xe_tang ";
+        string path = "imagetest/meo_xe_tang ";
         path += "(";
         path += to_string(i);
         path += ")";
@@ -308,14 +329,14 @@ void SatTest(){
     chrono::duration<double> duration1 = end1 - start1;
     cout <<"Sequence time Sat: "<<duration1.count()<<"s"<<endl;
     myfile <<"Sequence time Sat: "<<duration1.count()<<"s"<<endl;
-
+    myfile <<"Sequence time Sat main: "<<SatSeqTime<<"s"<<endl;
     //Start new clock
     auto start2 = chrono::high_resolution_clock::now(); 
     //Parallel Processing
     
     for(int i = 1; i <= 200; i++){
         // Image Path
-        string path = "E:/Bai Tap/Lap trinh song song/ImageProcessing/imagetest/meo_xe_tang ";
+        string path = "imagetest/meo_xe_tang ";
         path += "(";
         path += to_string(i);
         path += ")";
@@ -339,6 +360,8 @@ void SatTest(){
     chrono::duration<double> duration2 = end2 - start2;
     cout <<"Parallel OpenMP time: "<<duration2.count()<<"s"<<endl;
     myfile <<"Parallel OpenMP time Sat: "<<duration2.count()<<"s"<<endl;
+    myfile <<"Parallel OpenMP time Sat main: "<<SatMPTime<<"s"<<endl;
+    
     //Start Platform OpenCL
     //Check Device
     
@@ -348,7 +371,7 @@ void SatTest(){
     auto start3 = chrono::high_resolution_clock::now(); 
     for(int i = 1; i <= 200; i++){
         // Image Path
-        string path = "E:/Bai Tap/Lap trinh song song/ImageProcessing/imagetest/meo_xe_tang ";
+        string path = "imagetest/meo_xe_tang ";
         path += "(";
         path += to_string(i);
         path += ")";
@@ -371,16 +394,20 @@ void SatTest(){
     chrono::duration<double> duration3 = end3 - start3;
     cout <<"Parallel OpenCL time Sat:"<<duration3.count()<<"s"<<endl;
     myfile <<"Parallel OpenCL time Sat: "<<duration3.count()<<"s"<<endl;
+    myfile <<"Parallel OpenCL time Sat main: "<<SatCLTime<<"s"<<endl;
     myfile.close();
 }
 
 void BlurTest(){
+    BlurMPTime = 0;
+    BlurCLTime = 0;
+    BlurSeqTime = 0;
     ofstream myfile;
     myfile.open ("log.txt", ios_base::app);
     auto start1 = chrono::high_resolution_clock::now(); 
     for(int i = 1; i <= 200; i++){
         // Image Path
-        string path = "E:/Bai Tap/Lap trinh song song/ImageProcessing/imagetest/meo_xe_tang ";
+        string path = "imagetest/meo_xe_tang ";
         path += "(";
         path += to_string(i);
         path += ")";
@@ -404,13 +431,14 @@ void BlurTest(){
     chrono::duration<double> duration1 = end1 - start1;
     cout <<"Sequence time Blur: "<<duration1.count()<<"s"<<endl;
     myfile <<"Sequence time Blur: "<<duration1.count()<<"s"<<endl;
+    myfile <<"Sequence time Blur main: "<<BlurSeqTime<<"s"<<endl;
     //Start new clock
     auto start2 = chrono::high_resolution_clock::now(); 
     //Parallel Processing
     
     for(int i = 1; i <= 200; i++){
         // Image Path
-        string path = "E:/Bai Tap/Lap trinh song song/ImageProcessing/imagetest/meo_xe_tang ";
+        string path = "imagetest/meo_xe_tang ";
         path += "(";
         path += to_string(i);
         path += ")";
@@ -434,6 +462,8 @@ void BlurTest(){
     chrono::duration<double> duration2 = end2 - start2;
     cout <<"Parallel OpenMP time Blur: "<<duration2.count()<<"s"<<endl;
     myfile <<"Parallel OpenMP time Blur: "<<duration2.count()<<"s"<<endl;
+    myfile <<"Parallel OpenMP time Blur main: "<<BlurMPTime<<"s"<<endl;
+    
     //Start Platform OpenCL
     //Check Device
     
@@ -443,7 +473,7 @@ void BlurTest(){
     auto start3 = chrono::high_resolution_clock::now(); 
     for(int i = 1; i <= 200; i++){
         // Image Path
-        string path = "E:/Bai Tap/Lap trinh song song/ImageProcessing/imagetest/meo_xe_tang ";
+        string path = "imagetest/meo_xe_tang ";
         path += "(";
         path += to_string(i);
         path += ")";
@@ -465,5 +495,6 @@ void BlurTest(){
     chrono::duration<double> duration3 = end3 - start3;
     cout <<"Parallel OpenCL time Blur: "<<duration3.count()<<"s"<<endl;
     myfile <<"Parallel OpenCL time Blur: "<<duration3.count()<<"s"<<endl;
+    myfile <<"Parallel OpenCL time Blur main: "<<BlurCLTime<<"s"<<endl;
     myfile.close();
 }

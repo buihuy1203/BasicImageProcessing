@@ -8,6 +8,9 @@
 using namespace std;
 using namespace cv;
 //fasdasdga
+static double SatMPTime = 0;
+static double SatCLTime = 0;
+
 template<typename T>
 T newclamp(const T& value, const T& low, const T& high) {
     return (value < low) ? low : (value > high) ? high : value;
@@ -20,7 +23,7 @@ Mat ParallelSaturation(const Mat &input, float set_sar, int process) {
     Mat result = Mat::zeros(height, width, CV_8UC3);
     int procs_num = process;
     omp_set_num_threads(procs_num);
-    //auto startParallel = chrono::high_resolution_clock::now(); 
+    auto start = chrono::high_resolution_clock::now(); 
     #pragma omp parallel for collapse(2) shared(input, result)
     for (int y = 0; y < height; y++) {
         for (int x = 0; x < width; x++) {
@@ -88,13 +91,14 @@ Mat ParallelSaturation(const Mat &input, float set_sar, int process) {
             );
         }
     }
-    /*
-    auto endParralel = chrono::high_resolution_clock::now(); 
-    auto endSequence = chrono::high_resolution_clock::now(); 
-    chrono::duration<double> durationSequence = endSequence - startSequence;
-    chrono::duration<double> durationParallel = endParralel - startParallel;
-    cout <<"Saturation Process Time: "<<durationSequence.count()<<"s"<<endl;
-    cout <<"Saturation Parallel Time: "<<durationParallel.count()<<"s"<<endl;*/
+    
+    auto end = chrono::high_resolution_clock::now(); 
+    //auto endSequence = chrono::high_resolution_clock::now(); 
+    //chrono::duration<double> durationSequence = endSequence - startSequence;
+    chrono::duration<double> duration= end - start;
+    //cout <<"Saturation Process Time: "<<durationSequence.count()<<"s"<<endl;
+    //cout <<"Saturation Parallel Time: "<<durationParallel.count()<<"s"<<endl;
+    SatMPTime += duration.count();
     return result;
 }
 
@@ -138,7 +142,7 @@ Mat ParallelSaturationOpenCL(Mat &input, float set_sar) {
     cl::Buffer bufferOutput(context, CL_MEM_WRITE_ONLY, outputData.size());
 
     // Gửi dữ liệu lên thiết bị
-    cl::CommandQueue queue(context, device);
+    cl::CommandQueue queue(context, device, CL_QUEUE_PROFILING_ENABLE);
     queue.enqueueWriteBuffer(bufferInput, CL_TRUE, 0, inputData.size(), inputData.data());
 
     // Tạo kernel
@@ -151,8 +155,12 @@ Mat ParallelSaturationOpenCL(Mat &input, float set_sar) {
 
     // Thiết lập kích thước công việc
     cl::NDRange global(rows, cols);
+    auto start = std::chrono::high_resolution_clock::now();
     queue.enqueueNDRangeKernel(kernel, cl::NullRange, global, cl::NullRange);
-
+    queue.finish();
+    auto end = std::chrono::high_resolution_clock::now();
+    chrono::duration<double> duration = end - start; // Thời gian chạy kernel (ms)
+    SatCLTime += duration.count();
     // Lấy kết quả từ thiết bị
     queue.enqueueReadBuffer(bufferOutput, CL_TRUE, 0, outputData.size(), outputData.data());
 
@@ -161,3 +169,6 @@ Mat ParallelSaturationOpenCL(Mat &input, float set_sar) {
     memcpy(result.data, outputData.data(), outputData.size()); 
     return result;
 }
+
+extern double SatMPTime;
+extern double SatCLTime;

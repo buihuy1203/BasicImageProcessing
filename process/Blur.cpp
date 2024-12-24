@@ -3,9 +3,13 @@
 #include <algorithm> 
 #include <cmath>
 #include <vector>
+#include <chrono>
 #define M_PI  3.14159
 using namespace std;
 using namespace cv;
+
+static double BlurSeqTime = 0;
+
 vector<vector<float>> createGaussianKernel(int size, float sigma) {
     vector<vector<float>> kernel(size, vector<float>(size));
     float sum = 0.0f;
@@ -32,6 +36,7 @@ Mat BlurImage(Mat &input, float blur){
     int halfSize = 7 / 2;
     Mat result = Mat::zeros(input.rows,input.cols,CV_8UC3);
     // Duyệt qua từng pixel trong hình ảnh
+    auto start = chrono::high_resolution_clock::now();
     for (int i = 0; i < input.rows; ++i) {
         for (int j = 0; j < input.cols; ++j) {
             Vec3f sum = Vec3f(0.0f, 0.0f, 0.0f);
@@ -55,5 +60,8 @@ Mat BlurImage(Mat &input, float blur){
             result.at<Vec3b>(i, j) = Vec3b(static_cast<uchar>(sum[0]), static_cast<uchar>(sum[1]), static_cast<uchar>(sum[2]));
         }
     }
+    auto end = chrono::high_resolution_clock::now();
+    chrono::duration<double> duration = end - start;
+    BlurSeqTime += duration.count();
     return result;
 }

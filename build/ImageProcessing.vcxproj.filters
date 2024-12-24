@@ -1,16 +1,16 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="17.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
-    <ClCompile Include="E:\Bai Tap\Lap trinh song song\ImageProcessing\main.cpp">
+    <ClCompile Include="C:\Users\Huy_MB\Documents\Code\ImageProcessing\BasicImageProcessing\main.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <CustomBuild Include="E:\Bai Tap\Lap trinh song song\ImageProcessing\CMakeLists.txt" />
+    <CustomBuild Include="C:\Users\Huy_MB\Documents\Code\ImageProcessing\BasicImageProcessing\CMakeLists.txt" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Source Files">
-      <UniqueIdentifier>{BB606C42-887F-327A-A92E-50DA8955FCED}</UniqueIdentifier>
+      <UniqueIdentifier>{8F4ED037-5D4A-31B5-A413-4ED710853A24}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>

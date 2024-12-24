@@ -11,7 +11,8 @@
 using namespace std;
 using namespace cv;
 
-
+static double BlurMPTime = 0;
+static double BlurCLTime = 0;
 
 vector<vector<float>> ParallelcreateGaussianKernel(int size, float sigma) {
     vector<vector<float>> kernel(size, vector<float>(size));
@@ -39,8 +40,7 @@ Mat ParallelBlurImage(Mat &input, float blur, int process){
     int rows=input.rows;
     int cols=input.cols;
     omp_set_num_threads(process);
-    // Duyệt qua từng pixel trong hình ảnh parallel this, each thread will reponsible for block of input
-    //auto start2 = chrono::high_resolution_clock::now();
+    auto start = chrono::high_resolution_clock::now();
     #pragma omp parallel for collapse(2) shared(input, result)
     for ( int i = 0; i < rows; ++i){
         for (int j = 0; j < cols; ++j) {
@@ -63,12 +63,13 @@ Mat ParallelBlurImage(Mat &input, float blur, int process){
             result.at<Vec3b>(i, j) = Vec3b(static_cast<uchar>(sum[0]), static_cast<uchar>(sum[1]), static_cast<uchar>(sum[2]));
         }
     }
-    /*auto end2 = chrono::high_resolution_clock::now(); 
-    auto endSequence = chrono::high_resolution_clock::now(); 
-    chrono::duration<double> duration2 = end2 - start2;
-    cout <<"Blur Parralel Time: "<<duration2.count()<<"s"<<endl;
-    chrono::duration<double> durationSequence = endSequence - startSequence;
-    cout <<"Blur Process Time: "<<durationSequence.count()<<"s"<<endl;*/
+    auto end = chrono::high_resolution_clock::now(); 
+    //auto endSequence = chrono::high_resolution_clock::now(); 
+    chrono::duration<double> duration = end - start;
+    //cout <<"Blur Parralel Time: "<<duration2.count()<<"s"<<endl;
+    //chrono::duration<double> durationSequence = endSequence - startSequence;
+    //cout <<"Blur Process Time: "<<durationSequence.count()<<"s"<<endl;*/
+    BlurMPTime += duration.count();
     return result;
 }
 
@@ -119,7 +120,7 @@ Mat ParallelBlurOpenCL(Mat &input, float blur_set) {
     cl::Buffer bufferKernel(context, CL_MEM_READ_ONLY, kernel1D.size()* sizeof(float));
 
     // Gửi dữ liệu lên thiết bị
-    cl::CommandQueue queue(context, device);
+    cl::CommandQueue queue(context, device, CL_QUEUE_PROFILING_ENABLE);
     queue.enqueueWriteBuffer(bufferInput, CL_TRUE, 0, inputData.size(), inputData.data());
     queue.enqueueWriteBuffer(bufferKernel, CL_TRUE, 0, kernel1D.size()*sizeof(float), kernel1D.data());
     // Tạo kernel
@@ -134,11 +135,20 @@ Mat ParallelBlurOpenCL(Mat &input, float blur_set) {
 
     // Thiết lập kích thước công việc
     cl::NDRange global(rows, cols);
+
+    auto start = std::chrono::high_resolution_clock::now();
     queue.enqueueNDRangeKernel(kernel, cl::NullRange, global, cl::NullRange);
+    queue.finish();
+    auto end = std::chrono::high_resolution_clock::now();
+    chrono::duration<double> duration = end - start; // Thời gian chạy kernel (ms)
+    BlurCLTime += duration.count();
     // Lấy kết quả từ thiết bị
     queue.enqueueReadBuffer(bufferOutput, CL_TRUE, 0, outputData.size(), outputData.data());
+    
     // Chuyển đổi dữ liệu thành Mat
     Mat result(input.size(), CV_8UC3); // Đảm bảo khớp định dạng
     memcpy(result.data, outputData.data(), outputData.size());
     return result;
 }
+extern double BlurMPTime;
+extern double BlurCLTime;

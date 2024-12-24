@@ -25,7 +25,7 @@
     </ProjectConfiguration>
   </ItemGroup>
   <PropertyGroup Label="Globals">
-    <ProjectGuid>{1863A474-AD41-3B22-B3EB-055E9C9B0DFB}</ProjectGuid>
+    <ProjectGuid>{27972FDF-3DBF-3C53-9DFA-EA8F7F161A33}</ProjectGuid>
     <Keyword>Win32Proj</Keyword>
     <WindowsTargetPlatformVersion>10.0.22621.0</WindowsTargetPlatformVersion>
     <Platform>x64</Platform>
@@ -71,11 +71,11 @@
     <PostBuildEvent>
       <Message></Message>
       <Command>setlocal
-cd "E:\Bai Tap\Lap trinh song song\ImageProcessing\build"
+cd C:\Users\Huy_MB\Documents\Code\ImageProcessing\BasicImageProcessing\build
 if %errorlevel% neq 0 goto :cmEnd
-E:
+C:
 if %errorlevel% neq 0 goto :cmEnd
-C:\Strawberry\c\bin\cpack.exe -C $(Configuration) --config ./CPackConfig.cmake
+"C:\Program Files\CMake\bin\cpack.exe" -C $(Configuration) --config ./CPackConfig.cmake
 if %errorlevel% neq 0 goto :cmEnd
 :cmEnd
 endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
@@ -89,11 +89,11 @@ if %errorlevel% neq 0 goto :VCEnd</Command>
     <PostBuildEvent>
       <Message></Message>
       <Command>setlocal
-cd "E:\Bai Tap\Lap trinh song song\ImageProcessing\build"
+cd C:\Users\Huy_MB\Documents\Code\ImageProcessing\BasicImageProcessing\build
 if %errorlevel% neq 0 goto :cmEnd
-E:
+C:
 if %errorlevel% neq 0 goto :cmEnd
-C:\Strawberry\c\bin\cpack.exe -C $(Configuration) --config ./CPackConfig.cmake
+"C:\Program Files\CMake\bin\cpack.exe" -C $(Configuration) --config ./CPackConfig.cmake
 if %errorlevel% neq 0 goto :cmEnd
 :cmEnd
 endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
@@ -107,11 +107,11 @@ if %errorlevel% neq 0 goto :VCEnd</Command>
     <PostBuildEvent>
       <Message></Message>
       <Command>setlocal
-cd "E:\Bai Tap\Lap trinh song song\ImageProcessing\build"
+cd C:\Users\Huy_MB\Documents\Code\ImageProcessing\BasicImageProcessing\build
 if %errorlevel% neq 0 goto :cmEnd
-E:
+C:
 if %errorlevel% neq 0 goto :cmEnd
-C:\Strawberry\c\bin\cpack.exe -C $(Configuration) --config ./CPackConfig.cmake
+"C:\Program Files\CMake\bin\cpack.exe" -C $(Configuration) --config ./CPackConfig.cmake
 if %errorlevel% neq 0 goto :cmEnd
 :cmEnd
 endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
@@ -125,11 +125,11 @@ if %errorlevel% neq 0 goto :VCEnd</Command>
     <PostBuildEvent>
       <Message></Message>
       <Command>setlocal
-cd "E:\Bai Tap\Lap trinh song song\ImageProcessing\build"
+cd C:\Users\Huy_MB\Documents\Code\ImageProcessing\BasicImageProcessing\build
 if %errorlevel% neq 0 goto :cmEnd
-E:
+C:
 if %errorlevel% neq 0 goto :cmEnd
-C:\Strawberry\c\bin\cpack.exe -C $(Configuration) --config ./CPackConfig.cmake
+"C:\Program Files\CMake\bin\cpack.exe" -C $(Configuration) --config ./CPackConfig.cmake
 if %errorlevel% neq 0 goto :cmEnd
 :cmEnd
 endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
@@ -140,7 +140,8 @@ if %errorlevel% neq 0 goto :VCEnd</Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <CustomBuild Include="E:\Bai Tap\Lap trinh song song\ImageProcessing\build\CMakeFiles\092b251ce00db65c1371aba9f3fcbbb3\PACKAGE_force.rule">
+    <CustomBuild Include="C:\Users\Huy_MB\Documents\Code\ImageProcessing\BasicImageProcessing\build\CMakeFiles\6f48af6aefcecc05af780c884d1f2cf9\PACKAGE_force.rule">
+      <BuildInParallel Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</BuildInParallel>
       <Message Condition="'$(Configuration)|$(Platform)'=='Debug|x64'"> </Message>
       <Command Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">setlocal
 cd .
@@ -152,9 +153,10 @@ exit /b %1
 :cmDone
 if %errorlevel% neq 0 goto :VCEnd</Command>
       <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">%(AdditionalInputs)</AdditionalInputs>
-      <Outputs Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">E:\Bai Tap\Lap trinh song song\ImageProcessing\build\CMakeFiles\PACKAGE_force</Outputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">C:\Users\Huy_MB\Documents\Code\ImageProcessing\BasicImageProcessing\build\CMakeFiles\PACKAGE_force</Outputs>
       <LinkObjects Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">false</LinkObjects>
       <VerifyInputsAndOutputsExist Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">false</VerifyInputsAndOutputsExist>
+      <BuildInParallel Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</BuildInParallel>
       <Message Condition="'$(Configuration)|$(Platform)'=='Release|x64'"> </Message>
       <Command Condition="'$(Configuration)|$(Platform)'=='Release|x64'">setlocal
 cd .
@@ -166,9 +168,10 @@ exit /b %1
 :cmDone
 if %errorlevel% neq 0 goto :VCEnd</Command>
       <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Release|x64'">%(AdditionalInputs)</AdditionalInputs>
-      <Outputs Condition="'$(Configuration)|$(Platform)'=='Release|x64'">E:\Bai Tap\Lap trinh song song\ImageProcessing\build\CMakeFiles\PACKAGE_force</Outputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Release|x64'">C:\Users\Huy_MB\Documents\Code\ImageProcessing\BasicImageProcessing\build\CMakeFiles\PACKAGE_force</Outputs>
       <LinkObjects Condition="'$(Configuration)|$(Platform)'=='Release|x64'">false</LinkObjects>
       <VerifyInputsAndOutputsExist Condition="'$(Configuration)|$(Platform)'=='Release|x64'">false</VerifyInputsAndOutputsExist>
+      <BuildInParallel Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">true</BuildInParallel>
       <Message Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'"> </Message>
       <Command Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">setlocal
 cd .
@@ -180,9 +183,10 @@ exit /b %1
 :cmDone
 if %errorlevel% neq 0 goto :VCEnd</Command>
       <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">%(AdditionalInputs)</AdditionalInputs>
-      <Outputs Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">E:\Bai Tap\Lap trinh song song\ImageProcessing\build\CMakeFiles\PACKAGE_force</Outputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">C:\Users\Huy_MB\Documents\Code\ImageProcessing\BasicImageProcessing\build\CMakeFiles\PACKAGE_force</Outputs>
       <LinkObjects Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">false</LinkObjects>
       <VerifyInputsAndOutputsExist Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">false</VerifyInputsAndOutputsExist>
+      <BuildInParallel Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">true</BuildInParallel>
       <Message Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'"> </Message>
       <Command Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">setlocal
 cd .
@@ -194,20 +198,21 @@ exit /b %1
 :cmDone
 if %errorlevel% neq 0 goto :VCEnd</Command>
       <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">%(AdditionalInputs)</AdditionalInputs>
-      <Outputs Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">E:\Bai Tap\Lap trinh song song\ImageProcessing\build\CMakeFiles\PACKAGE_force</Outputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">C:\Users\Huy_MB\Documents\Code\ImageProcessing\BasicImageProcessing\build\CMakeFiles\PACKAGE_force</Outputs>
       <LinkObjects Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">false</LinkObjects>
       <VerifyInputsAndOutputsExist Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">false</VerifyInputsAndOutputsExist>
     </CustomBuild>
   </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
-    <ProjectReference Include="E:\Bai Tap\Lap trinh song song\ImageProcessing\build\ZERO_CHECK.vcxproj">
-      <Project>{A5C98AA2-05F3-3C9E-A6E2-AE23F7B06D4D}</Project>
+    <ProjectReference Include="C:\Users\Huy_MB\Documents\Code\ImageProcessing\BasicImageProcessing\build\ZERO_CHECK.vcxproj">
+      <Project>{CC8E3B8B-3796-339B-BAAC-F5CA7B85C24D}</Project>
       <Name>ZERO_CHECK</Name>
       <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </ProjectReference>
-    <ProjectReference Include="E:\Bai Tap\Lap trinh song song\ImageProcessing\build\ALL_BUILD.vcxproj">
-      <Project>{885854F6-DC40-3ACD-A72F-D1965A0A2278}</Project>
+    <ProjectReference Include="C:\Users\Huy_MB\Documents\Code\ImageProcessing\BasicImageProcessing\build\ALL_BUILD.vcxproj">
+      <Project>{3FB8FAE4-C54C-358E-B087-394BF18E7260}</Project>
       <Name>ALL_BUILD</Name>
       <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>

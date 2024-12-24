@@ -9,6 +9,9 @@
 using namespace std;
 using namespace cv;
 
+static double SharpMPTime = 0;
+static double SharpCLTime = 0;
+
 Mat ParallelSharpness(const Mat &input, double sharp, int process){
     //auto startSequence = chrono::high_resolution_clock::now(); 
     int procs_num= process;
@@ -21,7 +24,8 @@ Mat ParallelSharpness(const Mat &input, double sharp, int process){
         {1, -4, 1},
         {0, 1, 0}
     };
-    //auto startParrallel = chrono::high_resolution_clock::now(); 
+    Mat sharpenedImage = Mat::zeros(input.size(), input.type());
+    auto start = chrono::high_resolution_clock::now(); 
     #pragma omp parallel for collapse(2) shared(grayImage, result)
         for (int i = 1; i < grayImage.rows - 1; ++i) {
             for (int j = 1; j < grayImage.cols - 1; ++j) {
@@ -36,7 +40,6 @@ Mat ParallelSharpness(const Mat &input, double sharp, int process){
                 result.at<uchar>(i, j) = saturate_cast<uchar>(sum);
         }
     }
-    Mat sharpenedImage = Mat::zeros(input.size(), input.type());
     #pragma omp parallel for collapse(2) shared(input, sharpenedImage)
     for (int i = 0; i < input.rows; ++i) {
         for (int j = 0; j < input.cols; ++j) {
@@ -46,14 +49,14 @@ Mat ParallelSharpness(const Mat &input, double sharp, int process){
             }
         }
     }
-    /*
-    auto endParralel = chrono::high_resolution_clock::now(); 
-    auto endSequence = chrono::high_resolution_clock::now(); 
-    chrono::duration<double> durationSequence = endSequence - startSequence;
-    chrono::duration<double> durationParallel = endParralel - startParrallel;
-    cout <<"Sharpness Process Time: "<<durationSequence.count()<<"s"<<endl;
-    cout <<"Sharness Parallel Time: "<<durationParallel.count()<<"s"<<endl;
-    */
+    
+    auto end = chrono::high_resolution_clock::now(); 
+    //auto endSequence = chrono::high_resolution_clock::now(); 
+    //chrono::duration<double> durationSequence = endSequence - startSequence;
+    chrono::duration<double> duration = end - start;
+    //cout <<"Sharpness Process Time: "<<durationSequence.count()<<"s"<<endl;
+    //cout <<"Sharness Parallel Time: "<<durationParallel.count()<<"s"<<endl;
+    SharpMPTime += duration.count();
     return sharpenedImage;
 }
 
@@ -80,7 +83,7 @@ Mat ParallelSharpnessOpenCL(const Mat& input, float sharp_var) {
     cl::Device device = devices[0];
 
     cl::Context context(device);
-    cl::CommandQueue queue(context, device);
+    cl::CommandQueue queue(context, device, CL_QUEUE_PROFILING_ENABLE);
 
     // Load kernel source
     string kernelCode = loadKernelSourceFile("kernel/sharpness.cl");
@@ -117,8 +120,13 @@ Mat ParallelSharpnessOpenCL(const Mat& input, float sharp_var) {
 
     // Run kernels
     cl::NDRange global(cols, rows);
+    auto start = std::chrono::high_resolution_clock::now();
     queue.enqueueNDRangeKernel(sharpenKernel, cl::NullRange, global, cl::NullRange);
     queue.enqueueNDRangeKernel(applySharpnessKernel, cl::NullRange, global, cl::NullRange);
+    queue.finish();
+    auto end = std::chrono::high_resolution_clock::now();
+    chrono::duration<double> duration = end - start; // Thời gian chạy kernel (ms)
+    SharpCLTime += duration.count();
 
     // Read back the result into outputData
     queue.enqueueReadBuffer(sharpResultBuffer, CL_TRUE, 0, outputData.size(), outputData.data());
@@ -128,3 +136,6 @@ Mat ParallelSharpnessOpenCL(const Mat& input, float sharp_var) {
 
     return result;
 }
+
+extern double SharpMPTime;
+extern double SharpCLTime;

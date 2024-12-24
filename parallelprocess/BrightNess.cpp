@@ -9,12 +9,16 @@
 #include "readfile.hpp"
 using namespace std;
 using namespace cv;
+
+static double BrightMPTime = 0;
+static double BrightCLTime = 0;
+
 Mat ParallelBrightNess(Mat &input, int bright, int process){
     //auto startSequence = chrono::high_resolution_clock::now(); 
     Mat result =  Mat::zeros(input.rows, input.cols, CV_8UC3);
     int procs_num=process;
     omp_set_num_threads(procs_num);
-    //auto startParrallel = chrono::high_resolution_clock::now(); 
+    auto start = chrono::high_resolution_clock::now(); 
     #pragma omp parallel for collapse(2) shared(input, result)
     for(int y=0; y < input.rows; y++){
          for(int x = 0; x < input.cols; x++){
@@ -25,14 +29,14 @@ Mat ParallelBrightNess(Mat &input, int bright, int process){
              result.at<Vec3b>(y, x) = Vec3b(saturate_cast<uchar>(blue+bright), saturate_cast<uchar>(green+bright), saturate_cast<uchar>(red+bright));
          }
     }
-    /*
-    auto endParralel = chrono::high_resolution_clock::now(); 
-    auto endSequence = chrono::high_resolution_clock::now(); 
-    chrono::duration<double> durationSequence = endSequence - startSequence;
-    chrono::duration<double> durationParallel = endParralel - startParrallel;
-    cout <<"Brightness Process Time: "<<durationSequence.count()<<"s"<<endl;
-    cout <<"Brightness Parallel Time: "<<durationParallel.count()<<"s"<<endl;
-    */
+    
+    auto end = chrono::high_resolution_clock::now(); 
+    //auto endSequence = chrono::high_resolution_clock::now(); 
+    chrono::duration<double> duration = end - start;
+    BrightMPTime += duration.count();
+   // chrono::duration<double> durationParallel = endParralel - startParrallel;
+    //cout <<"Brightness Process Time: "<<durationSequence.count()<<"s"<<endl;
+    //cout <<"Brightness Parallel Time: "<<durationParallel.count()<<"s"<<endl;
     return result;
 }
 
@@ -76,7 +80,7 @@ Mat ParallelBrightnessOpenCL(Mat &input, int bright) {
     cl::Buffer bufferOutput(context, CL_MEM_WRITE_ONLY, outputData.size());
 
     // Send data to device
-    cl::CommandQueue queue(context, device);
+    cl::CommandQueue queue(context, device, CL_QUEUE_PROFILING_ENABLE);
     queue.enqueueWriteBuffer(bufferInput, CL_TRUE, 0, inputData.size(), inputData.data());
 
     // Kernel Initialization
@@ -89,8 +93,12 @@ Mat ParallelBrightnessOpenCL(Mat &input, int bright) {
 
     // Work Size
     cl::NDRange global(rows, cols);
+    auto start = std::chrono::high_resolution_clock::now();
     queue.enqueueNDRangeKernel(kernel, cl::NullRange, global, cl::NullRange);
-
+    queue.finish();
+    auto end = std::chrono::high_resolution_clock::now();
+    chrono::duration<double> duration = end - start; // Thời gian chạy kernel (ms)
+    BrightCLTime += duration.count();
     // Read Result
     queue.enqueueReadBuffer(bufferOutput, CL_TRUE, 0, outputData.size(), outputData.data());
     // Convert Result
@@ -98,3 +106,6 @@ Mat ParallelBrightnessOpenCL(Mat &input, int bright) {
     memcpy(result.data, outputData.data(), outputData.size());
     return result;
 }
+
+extern double BrightMPTime;
+extern double BrightCLTime;

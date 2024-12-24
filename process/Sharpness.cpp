@@ -2,9 +2,11 @@
 #include <opencv2/opencv.hpp>
 #include <algorithm> 
 #include <cmath>
-
+#include <chrono>
 using namespace std;
 using namespace cv;
+
+static double SharpSeqTime = 0;
 
 Mat Sharpness(const Mat &input, double sharp){
     Mat result = Mat::zeros(input.size(), input.type());
@@ -15,6 +17,8 @@ Mat Sharpness(const Mat &input, double sharp){
         {1, -4, 1},
         {0, 1, 0}
     };
+    Mat sharpenedImage = Mat::zeros(input.size(), input.type());
+    auto start = chrono::high_resolution_clock::now();
     for (int i = 1; i < grayImage.rows - 1; ++i) {
         for (int j = 1; j < grayImage.cols - 1; ++j) {
             // Tính giá trị mới cho pixel (i, j)
@@ -28,7 +32,7 @@ Mat Sharpness(const Mat &input, double sharp){
             result.at<uchar>(i, j) = saturate_cast<uchar>(sum);
         }
     }
-    Mat sharpenedImage = Mat::zeros(input.size(), input.type());
+    
     
     for (int i = 0; i < input.rows; ++i) {
         for (int j = 0; j < input.cols; ++j) {
@@ -38,6 +42,8 @@ Mat Sharpness(const Mat &input, double sharp){
             }
         }
     }
-
+    auto end = chrono::high_resolution_clock::now();
+    chrono::duration<double> duration = end - start;
+    SharpSeqTime += duration.count();
     return sharpenedImage;
 }

@@ -1,34 +1,35 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Site BuildName="Win32-MSBuild"
 	BuildStamp="20241223-0324-Experimental"
-	Name="LAPHOCTAPCUAHUY"
-	Generator="ctest-3.26.4"
+	Name="Laptop-Huy-MB"
+	Generator="ctest-3.31.3"
 	CompilerName="C:/Program Files/Microsoft Visual Studio/2022/Community/VC/Tools/MSVC/14.42.34433/bin/Hostx64/x64/cl.exe"
-	CompilerVersion="19.42.34433.0"
+	CompilerVersion="19.42.34435.0"
 	OSName="Windows"
-	Hostname="LAPHOCTAPCUAHUY"
-	OSRelease=" Professional"
-	OSVersion=" (Build 9200)"
+	Hostname="Laptop-Huy-MB"
+	OSRelease=" Personal"
+	OSVersion=" (Build 22631)"
 	OSPlatform="AMD64"
 	Is64Bits="1"
-	VendorString=""
-	VendorID="Unknown Manufacturer"
-	FamilyID="0"
-	ModelID="0"
-	ProcessorCacheSize="0"
-	NumberOfLogicalCPU="8"
-	NumberOfPhysicalCPU="4"
-	TotalVirtualMemory="32334"
-	TotalPhysicalMemory="16167"
+	VendorString="AuthenticAMD"
+	VendorID="Advanced Micro Devices"
+	FamilyID="15"
+	ModelID="5"
+	ModelName="AMD Ryzen 5 8645HS w/ Radeon 760M Graphics"
+	ProcessorCacheSize="64"
+	NumberOfLogicalCPU="12"
+	NumberOfPhysicalCPU="6"
+	TotalVirtualMemory="19354"
+	TotalPhysicalMemory="14080"
 	LogicalProcessorsPerPhysical="2"
-	ProcessorClockFrequency="3110"
+	ProcessorClockFrequency="4291"
 	>
 	<Testing>
-		<StartDateTime>Dec 23 10:24 SE Asia Standard Time</StartDateTime>
-		<StartTestTime>1734924294</StartTestTime>
+		<StartDateTime>Dec 24 00:52 SE Asia Standard Time</StartDateTime>
+		<StartTestTime>1734976344</StartTestTime>
 		<TestList/>
-		<EndDateTime>Dec 23 10:24 SE Asia Standard Time</EndDateTime>
-		<EndTestTime>1734924294</EndTestTime>
+		<EndDateTime>Dec 24 00:52 SE Asia Standard Time</EndDateTime>
+		<EndTestTime>1734976344</EndTestTime>
 		<ElapsedMinutes>0</ElapsedMinutes>
 	</Testing>
 </Site>

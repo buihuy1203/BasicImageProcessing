@@ -19,3 +19,53 @@ Parallel OpenCL time Blur: 132.347s
 Sequence time YCrCB: 96.6043s
 Parallel OpenMP time YCrCB: 68.6891s
 Parallel OpenCL time YCrCb: 106.982s
+Sequence time total: 0.004058s
+Parallel OpenMP time total: 0.0007631s
+Parallel OpenCL time total: 0.0005005s
+Sequence time Bright: 0.0013957s
+Parallel OpenMP time Bright: 0.0004219s
+Parallel OpenCL time Bright: 0.0004356s
+Sequence time Sat: 0.0011237s
+Parallel OpenMP time Sat: 0.0013038s
+Parallel OpenCL time Sat: 0.0045854s
+Sequence time Sharp: 0.000442s
+Parallel OpenMP time Sharp: 0.0004656s
+Parallel OpenCL time Sharp: 0.0008235s
+Sequence time Blur: 0.0016473s
+Parallel OpenMP time Blur: 0.0005465s
+Parallel OpenCL time Blur: 0.0006071s
+Sequence time YCrCB: 0.0014213s
+Parallel OpenMP time YCrCB: 0.0014018s
+Parallel OpenCL time YCrCb: 0.0008631s
+Sequence time Blur: 32.5298s
+Parallel OpenMP time Blur: 9.97395s
+Parallel OpenCL time Blur: 3.75517s
+Sequence time Blur: 32.409s
+Parallel OpenMP time Blur: 9.77294s
+Parallel OpenCL time Blur: 11.0411s
+Sequence time Blur: 0.48853s
+Parallel OpenMP time Blur: 0.155401s
+Parallel OpenCL time Blur: 5.28284s
+Sequence time Bright: 155.577s
+Parallel OpenMP time Bright: 105.647s
+Parallel OpenMP time Bright main: 28.596s
+Parallel OpenCL time Bright: 143.789s
+Parallel OpenCL time Bright main: 0s
+Parallel OpenMP time Bright: 104.468s
+Parallel OpenMP time Bright main: 28.1894s
+Parallel OpenCL time Bright: 156.097s
+Parallel OpenCL time Bright main: 0s
+Parallel OpenMP time Bright: 102.004s
+Parallel OpenMP time Bright main: 24.4506s
+Parallel OpenCL time Bright: 145.602s
+Parallel OpenCL time Bright main: 0s
+Parallel OpenCL time Bright: 139.178s
+Parallel OpenCL time Bright main: 0s
+Parallel OpenCL time Bright: 76.562s
+Parallel OpenCL time Bright main: 0s
+Parallel OpenCL time Sat: 82.5975s
+Parallel OpenCL time Sat main: 0s
+Parallel OpenCL time Blur: 83.2089s
+Parallel OpenCL time Blur main: 0s
+Parallel OpenCL time Blur: 83.2024s
+Parallel OpenCL time Blur main: 5.94806s

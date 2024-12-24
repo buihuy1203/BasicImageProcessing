@@ -2,8 +2,12 @@
 #include <opencv2/opencv.hpp>
 #include <algorithm> 
 #include <cmath>
+#include <chrono>
 using namespace std;
 using namespace cv;
+
+static double SatSeqTime = 0;
+
 template<typename T>
 T clamp(const T& value, const T& low, const T& high) {
     return (value < low) ? low : (value > high) ? high : value;
@@ -13,7 +17,7 @@ Mat Saturation(const Mat &input, float set_sar){
     int width = input.cols;
 
     Mat result = Mat::zeros(height, width, CV_8UC3);
-
+    auto start = chrono::high_resolution_clock::now();
     for (int y = 0; y < height; y++) {
         for (int x = 0; x < width; x++) {
             Vec3b pixel = input.at<Vec3b>(y, x);
@@ -80,5 +84,8 @@ Mat Saturation(const Mat &input, float set_sar){
             );
         }
     }
+    auto end = chrono::high_resolution_clock::now();
+    chrono::duration<double> duration = end - start;
+    SatSeqTime += duration.count();
     return result;  
 }

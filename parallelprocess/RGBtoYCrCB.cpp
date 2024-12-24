@@ -8,6 +8,9 @@
 using namespace std;
 using namespace cv;
 
+static double YCrCBMPTime = 0;
+static double YCrCBCLTime = 0;
+
 Mat ParallelYCrCBImage(const Mat &input, int process) {
     //auto startSequence = chrono::high_resolution_clock::now(); 
     int height = input.rows;
@@ -15,7 +18,7 @@ Mat ParallelYCrCBImage(const Mat &input, int process) {
     Mat result = Mat::zeros(height, width, CV_8UC3);
     int procs_num=process;
     omp_set_num_threads(procs_num);
-    //auto startParrallel = chrono::high_resolution_clock::now(); 
+    auto start = chrono::high_resolution_clock::now(); 
     #pragma omp parallel for collapse(2) shared(input, result)
      for (int y = 0; y < height; y++) {
          for (int x = 0; x < width; x++) {
@@ -30,13 +33,14 @@ Mat ParallelYCrCBImage(const Mat &input, int process) {
             result.at<Vec3b>(y, x) = Vec3b(Y, Cb, Cr);
          }
      }
-    /*
-    auto endParralel = chrono::high_resolution_clock::now(); 
-    auto endSequence = chrono::high_resolution_clock::now(); 
-    chrono::duration<double> durationSequence = endSequence - startSequence;
-    chrono::duration<double> durationParallel = endParralel - startParrallel;
-    cout <<"YCrCB Process Time: "<<durationSequence.count()<<"s"<<endl;
-    cout <<"YCrCB Parallel Time: "<<durationParallel.count()<<"s"<<endl;*/
+    
+    auto end = chrono::high_resolution_clock::now(); 
+    //auto endSequence = chrono::high_resolution_clock::now(); 
+    //chrono::duration<double> durationSequence = endSequence - startSequence;
+    chrono::duration<double> duration = end - start;
+    YCrCBMPTime += duration.count();
+    //cout <<"YCrCB Process Time: "<<durationSequence.count()<<"s"<<endl;
+    //cout <<"YCrCB Parallel Time: "<<durationParallel.count()<<"s"<<endl;*/
     return result;  
 }
 
@@ -80,7 +84,7 @@ Mat ParallelYCrCBOpenCL(Mat &input) {
     cl::Buffer bufferOutput(context, CL_MEM_WRITE_ONLY, outputData.size());
 
     // Gửi dữ liệu lên thiết bị
-    cl::CommandQueue queue(context, device);
+    cl::CommandQueue queue(context, device, CL_QUEUE_PROFILING_ENABLE);
     queue.enqueueWriteBuffer(bufferInput, CL_TRUE, 0, inputData.size(), inputData.data());
 
     // Tạo kernel
@@ -92,13 +96,20 @@ Mat ParallelYCrCBOpenCL(Mat &input) {
 
     // Thiết lập kích thước công việc
     cl::NDRange global(rows, cols);
+    auto start = std::chrono::high_resolution_clock::now();
     queue.enqueueNDRangeKernel(kernel, cl::NullRange, global, cl::NullRange);
-
+    queue.finish();
+    auto end = std::chrono::high_resolution_clock::now();
+    chrono::duration<double> duration = end - start; // Thời gian chạy kernel (ms)
+    YCrCBCLTime += duration.count();
     // Lấy kết quả từ thiết bị
     queue.enqueueReadBuffer(bufferOutput, CL_TRUE, 0, outputData.size(), outputData.data());
-
+    
     // Chuyển đổi dữ liệu thành Mat
     Mat result = Mat::zeros(rows,cols, CV_8UC3);
     memcpy(result.data, outputData.data(), outputData.size()); 
     return result;
 }
+
+extern double YCrCBMPTime;
+extern double YCrCBCLTime;

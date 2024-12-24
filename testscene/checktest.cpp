@@ -14,7 +14,7 @@ bool compare(const Mat &input, const Mat &result){
 void checktest(){
     for(int i = 1; i <= 200; i++){
         // Image Path
-        string path = "E:/Bai Tap/Lap trinh song song/ImageProcessing/imagetest/meo_xe_tang ";
+        string path = "imagetest/meo_xe_tang ";
         path += "(";
         path += to_string(i);
         path += ")";

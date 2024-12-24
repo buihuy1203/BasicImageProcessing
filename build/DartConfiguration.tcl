@@ -4,14 +4,14 @@
 
 
 # Configuration directories and files
-SourceDirectory: E:/Bai Tap/Lap trinh song song/ImageProcessing
-BuildDirectory: E:/Bai Tap/Lap trinh song song/ImageProcessing/build
+SourceDirectory: C:/Users/Huy_MB/Documents/Code/ImageProcessing/BasicImageProcessing
+BuildDirectory: C:/Users/Huy_MB/Documents/Code/ImageProcessing/BasicImageProcessing/build
 
 # Where to place the cost data store
 CostDataFile: 
 
 # Site is something like machine.domain, i.e. pragmatic.crd
-Site: LAPHOCTAPCUAHUY
+Site: Laptop-Huy-MB
 
 # Build name is osname-revision-compiler, i.e. Linux-2.4.2-2smp-c++
 BuildName: Win32-MSBuild
@@ -27,8 +27,8 @@ SubmitInactivityTimeout:
 NightlyStartTime: 00:00:00 EDT
 
 # Commands for the build/test/submit cycle
-ConfigureCommand: "C:/Strawberry/c/bin/cmake.exe" "E:/Bai Tap/Lap trinh song song/ImageProcessing"
-MakeCommand: C:\Strawberry\c\bin\cmake.exe --build . --config "${CTEST_CONFIGURATION_TYPE}"
+ConfigureCommand: "C:/Program Files/CMake/bin/cmake.exe" "C:/Users/Huy_MB/Documents/Code/ImageProcessing/BasicImageProcessing"
+MakeCommand: "C:\Program Files\CMake\bin\cmake.exe" --build . --config "${CTEST_CONFIGURATION_TYPE}"
 DefaultCTestConfigurationType: Release
 
 # version control
@@ -64,7 +64,7 @@ UpdateType: git
 
 # Compiler info
 Compiler: C:/Program Files/Microsoft Visual Studio/2022/Community/VC/Tools/MSVC/14.42.34433/bin/Hostx64/x64/cl.exe
-CompilerVersion: 19.42.34433.0
+CompilerVersion: 19.42.34435.0
 
 # Dynamic analysis (MemCheck)
 PurifyCommand: 
@@ -81,7 +81,7 @@ MemoryCheckCommandOptions:
 MemoryCheckSuppressionFile: 
 
 # Coverage
-CoverageCommand: C:/MinGW/bin/gcov.exe
+CoverageCommand: C:/msys64/ucrt64/bin/gcov.exe
 CoverageExtraFlags: -l
 
 # Testing options
@@ -94,6 +94,9 @@ TimeOut: 1500
 # During parallel testing CTest will not start a new test if doing
 # so would cause the system load to exceed this value.
 TestLoad: 
+
+TLSVerify: 
+TLSVersion: 
 
 UseLaunchers: 0
 CurlOptions: 

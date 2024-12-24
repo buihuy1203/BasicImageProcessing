@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Site BuildName="Win32-MSBuild"
+	BuildStamp="20241224-0741-Experimental"
+	Name="Laptop-Huy-MB"
+	Generator="ctest-3.31.3"
+	CompilerName="C:/Program Files/Microsoft Visual Studio/2022/Community/VC/Tools/MSVC/14.42.34433/bin/Hostx64/x64/cl.exe"
+	CompilerVersion="19.42.34435.0"
+	OSName="Windows"
+	Hostname="Laptop-Huy-MB"
+	OSRelease=" Personal"
+	OSVersion=" (Build 22631)"
+	OSPlatform="AMD64"
+	Is64Bits="1"
+	VendorString="AuthenticAMD"
+	VendorID="Advanced Micro Devices"
+	FamilyID="15"
+	ModelID="5"
+	ModelName="AMD Ryzen 5 8645HS w/ Radeon 760M Graphics"
+	ProcessorCacheSize="64"
+	NumberOfLogicalCPU="12"
+	NumberOfPhysicalCPU="6"
+	TotalVirtualMemory="21635"
+	TotalPhysicalMemory="14080"
+	LogicalProcessorsPerPhysical="2"
+	ProcessorClockFrequency="4291"
+	>
+	<Testing>
+		<StartDateTime>Dec 24 22:01 SE Asia Standard Time</StartDateTime>
+		<StartTestTime>1735052470</StartTestTime>
+		<TestList/>
+		<EndDateTime>Dec 24 22:01 SE Asia Standard Time</EndDateTime>
+		<EndTestTime>1735052470</EndTestTime>
+		<ElapsedMinutes>0</ElapsedMinutes>
+	</Testing>
+</Site>

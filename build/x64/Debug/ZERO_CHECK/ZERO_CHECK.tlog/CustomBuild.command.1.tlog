@@ -1,6 +1,6 @@
-^E:\BAI TAP\LAP TRINH SONG SONG\IMAGEPROCESSING\BUILD\CMAKEFILES\092B251CE00DB65C1371ABA9F3FCBBB3\GENERATE.STAMP.RULE
+^C:\USERS\HUY_MB\DOCUMENTS\CODE\IMAGEPROCESSING\BASICIMAGEPROCESSING\BUILD\CMAKEFILES\6F48AF6AEFCECC05AF780C884D1F2CF9\GENERATE.STAMP.RULE
 setlocal
-C:\Strawberry\c\bin\cmake.exe "-SE:/Bai Tap/Lap trinh song song/ImageProcessing" "-BE:/Bai Tap/Lap trinh song song/ImageProcessing/build" --check-stamp-list CMakeFiles/generate.stamp.list --vs-solution-file "E:/Bai Tap/Lap trinh song song/ImageProcessing/build/ImageProcessing.sln"
+"C:\Program Files\CMake\bin\cmake.exe" -SC:/Users/Huy_MB/Documents/Code/ImageProcessing/BasicImageProcessing -BC:/Users/Huy_MB/Documents/Code/ImageProcessing/BasicImageProcessing/build --check-stamp-list CMakeFiles/generate.stamp.list --vs-solution-file C:/Users/Huy_MB/Documents/Code/ImageProcessing/BasicImageProcessing/build/ImageProcessing.sln
 if %errorlevel% neq 0 goto :cmEnd
 :cmEnd
 endlocal & call :cmErrorLevel %errorlevel% & goto :cmDone
